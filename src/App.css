@@ -1,38 +1,232 @@
-.App {
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200&family=Outfit:wght@300&display=swap");
+body {
+  font-family: "Inconsolata", monospace;
+  font-size: 1.5em;
+  font-weight: bolder;
+  background: #e4594f;
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-.App-link {
-  color: #61dafb;
+.todo-app {
+  padding: 3rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  max-width: 95vw;
+  min-height: 600px;
+  background: #161a2b;
+  text-align: center;
+  margin: 128px auto;
+  border-radius: 10px;
+  padding-bottom: 32px;
+  -webkit-box-shadow: 2px 2px 20px;
+          box-shadow: 2px 2px 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.todo-button {
+  font-family: "Inconsolata", monospace;
+  font-size: 1rem;
+  font-weight: bolder;
+  padding: 16px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  outline: none;
+  background: -webkit-gradient(linear, left top, right top, from(#0c92ff), to(#6dc5ff));
+  background: linear-gradient(90deg, #0c92ff 0%, #6dc5ff 100%);
+  color: #fff;
+  text-transform: capitalize;
+  opacity: 1;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }
+
+.todo-button:hover {
+  color: #ffffff;
+  background: -webkit-gradient(linear, left top, right top, color-stop(20%, #0c92ff), color-stop(80%, #6dc5ff));
+  background: linear-gradient(90deg, #0c92ff 20%, #6dc5ff 80%);
+  -webkit-box-shadow: inset 0px 0px 0px 2px #ffbe0c;
+  box-shadow: inset 0px 0px 0px 2px #ffbe0c;
+}
+
+.todo-button:active {
+  background: -webkit-gradient(linear, left top, right top, from(#bbddfa), color-stop(20%, #6dc5ff));
+  background: linear-gradient(90deg, #bbddfa 0%, #6dc5ff 20%);
+  position: relative;
+  top: 4px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.complete {
+  text-decoration: line-through;
+  opacity: 0.4;
+}
+
+.todo-form {
+  margin-bottom: 32px;
+}
+
+.todo-input {
+  font-family: "Inconsolata", monospace;
+  font-size: 1rem;
+  font-weight: bolder;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  padding: 14px 32px 14px 16px;
+  border-radius: 4px 0 0 4px;
+  border: 2px solid #0c92ff;
+  outline: none;
+  width: 60%;
+  background: transparent;
+  color: #fff;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.todo-input:hover {
+  background-color: #0e0e0e;
+  border: 2px solid #ffbe0c;
+}
+
+.todo-input.edit {
+  border: 2px solid #149fff;
+}
+
+.todo-button.edit {
+  background: -webkit-gradient(linear, left top, right top, from(#149fff), to(#117aff));
+  background: linear-gradient(90deg, #149fff 0%, #117aff 100%);
+  padding: 16px 22px;
+}
+
+.todo-container {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  position: relative;
+}
+
+.todo-row {
+  overflow: auto;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  font-size: 18px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 4px auto;
+  color: black;
+  background: -webkit-gradient(linear, left top, right top, from(#f7f7f7), to(#f8f8f8));
+  background: linear-gradient(90deg, #f7f7f7 0%, #f8f8f8 100%);
+  padding: 5px;
+  border-radius: 5px;
+  width: 90%;
+}
+
+h1 {
+  color: aliceblue;
+  font-family: "Inconsolata", monospace;
+  margin: 32px 0;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 36px;
+  cursor: pointer;
+}
+
+.delete-icon {
+  margin-right: 5px;
+  color: black;
+  border-radius: 50%;
+  padding: 3px;
+  color: black;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
+}
+
+.delete-icon:hover {
+  color: #242424;
+  background-color: #2ca0ff;
+}
+
+.delete-icon:active {
+  background-color: #6ecaff;
+  position: relative;
+  top: 4px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.edit-icon {
+  border-radius: 50%;
+  padding: 3px;
+  color: black;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
+}
+
+.edit-icon:hover {
+  color: #242424;
+  background-color: #2ca0ff;
+}
+
+.edit-icon:active {
+  background-color: #6ecaff;
+  position: relative;
+  top: 4px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+html::after {
+  content: "";
+  background: linear-gradient(21deg, #10abff, #1beabd);
+  height: 3px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+/*# sourceMappingURL=App.css.map */

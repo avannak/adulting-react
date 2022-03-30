@@ -1,0 +1,201 @@
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200&family=Outfit:wght@300&display=swap");
+$main-color: #e4594f;
+
+body {
+  font-family: "Inconsolata", monospace;
+  font-size: 1.5em;
+  font-weight: bolder;
+  background: $main-color;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.todo-app {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  max-width: 95vw;
+  min-height: 600px;
+  background: #161a2b;
+  text-align: center;
+  margin: 128px auto;
+  border-radius: 10px;
+  padding-bottom: 32px;
+  box-shadow: 2px 2px 20px;
+}
+
+.todo-button {
+  font-family: "Inconsolata", monospace;
+  font-size: 1rem;
+  font-weight: bolder;
+  padding: 16px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  outline: none;
+  background: linear-gradient(
+    90deg,
+    rgb(12, 146, 255) 0%,
+    rgb(109, 197, 255) 100%
+  );
+  color: #fff;
+  text-transform: capitalize;
+  opacity: 1;
+  transition: 0.2s;
+  &:hover {
+    color: #ffffff;
+    background: linear-gradient(
+      90deg,
+      rgb(12, 146, 255) 20%,
+      rgb(109, 197, 255) 80%
+    );
+    -webkit-box-shadow: inset 0px 0px 0px 2px #ffbe0c;
+    -moz-box-shadow: inset 0px 0px 0px 2px #ffbe0c;
+    box-shadow: inset 0px 0px 0px 2px #ffbe0c;
+  }
+  &:active {
+    background: linear-gradient(
+      90deg,
+      rgb(187, 221, 250) 0%,
+      rgb(109, 197, 255) 20%
+    );
+    position: relative;
+    top: 4px;
+    box-shadow: none;
+  }
+}
+.complete {
+  text-decoration: line-through;
+  opacity: 0.4;
+}
+
+.todo-form {
+  margin-bottom: 32px;
+}
+.todo-input {
+  font-family: "Inconsolata", monospace;
+  font-size: 1rem;
+  font-weight: bolder;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  padding: 14px 32px 14px 16px;
+  border-radius: 4px 0 0 4px;
+  border: 2px solid #0c92ff;
+  outline: none;
+  width: 60%;
+  background: transparent;
+  color: #fff;
+  transition: 0.2s;
+  &:hover {
+    background-color: rgb(14, 14, 14);
+    border: 2px solid #ffbe0c;
+  }
+}
+
+.todo-input.edit {
+  border: 2px solid #149fff;
+}
+
+.todo-button.edit {
+  background: linear-gradient(
+    90deg,
+    rgba(20, 159, 255, 1) 0%,
+    rgba(17, 122, 255, 1) 100%
+  );
+
+  padding: 16px 22px;
+}
+
+.todo-container {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.todo-row {
+  overflow: auto;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4px auto;
+  color: rgb(0, 0, 0);
+  background: linear-gradient(
+    90deg,
+    rgb(247, 247, 247) 0%,
+    rgb(248, 248, 248) 100%
+  );
+
+  padding: 5px;
+  border-radius: 5px;
+  width: 90%;
+}
+h1 {
+  color: aliceblue;
+  font-family: "Inconsolata", monospace;
+  margin: 32px 0;
+}
+* {
+  box-sizing: border-box;
+}
+.icons {
+  display: flex;
+  align-items: center;
+  font-size: 36px;
+  cursor: pointer;
+}
+
+.delete-icon {
+  margin-right: 5px;
+  color: rgb(0, 0, 0);
+  border-radius: 50%;
+  padding: 3px;
+  color: rgb(0, 0, 0);
+  transition: 0.1s;
+  &:hover {
+    color: #242424;
+    background-color: #2ca0ff;
+  }
+  &:active {
+    background-color: #6ecaff;
+    position: relative;
+    top: 4px;
+    box-shadow: none;
+  }
+}
+
+.edit-icon {
+  border-radius: 50%;
+  padding: 3px;
+  color: rgb(0, 0, 0);
+  transition: 0.1s;
+  &:hover {
+    color: #242424;
+    background-color: #2ca0ff;
+  }
+  &:active {
+    background-color: #6ecaff;
+    position: relative;
+    top: 4px;
+    box-shadow: none;
+  }
+}
+
+html::after {
+  content: "";
+  background: linear-gradient(21deg, #10abff, #1beabd);
+  height: 3px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
