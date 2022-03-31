@@ -28,6 +28,7 @@ body {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: start;
+  min-width: 95vw;
   max-width: 95vw;
   min-height: 600px;
   background: #161a2b;
@@ -69,8 +70,8 @@ body {
 }
 
 .todo-button:active {
-  background: -webkit-gradient(linear, left top, right top, from(#bbddfa), color-stop(20%, #6dc5ff));
-  background: linear-gradient(90deg, #bbddfa 0%, #6dc5ff 20%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(20%, #bbddfa), color-stop(60%, #6dc5ff));
+  background: linear-gradient(90deg, #bbddfa 20%, #6dc5ff 60%);
   position: relative;
   top: 4px;
   -webkit-box-shadow: none;
@@ -108,6 +109,10 @@ body {
   border: 2px solid #ffbe0c;
 }
 
+.todo-text {
+  padding: 3px;
+}
+
 .todo-input.edit {
   border: 2px solid #149fff;
 }
@@ -132,7 +137,6 @@ body {
 }
 
 .todo-row {
-  overflow: auto;
   overflow-wrap: break-word;
   word-wrap: break-word;
   font-size: 18px;
@@ -147,11 +151,13 @@ body {
           align-items: center;
   margin: 4px auto;
   color: black;
-  background: -webkit-gradient(linear, left top, right top, from(#f7f7f7), to(#f8f8f8));
-  background: linear-gradient(90deg, #f7f7f7 0%, #f8f8f8 100%);
-  padding: 5px;
+  padding: 3px;
   border-radius: 5px;
   width: 90%;
+}
+
+.list-item {
+  border-radius: 8px;
 }
 
 h1 {
@@ -172,6 +178,9 @@ h1 {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
   font-size: 36px;
   cursor: pointer;
 }
@@ -179,8 +188,10 @@ h1 {
 .delete-icon {
   margin-right: 5px;
   color: black;
+  padding: 2px;
+  height: 1em;
+  width: 1em;
   border-radius: 50%;
-  padding: 3px;
   color: black;
   -webkit-transition: 0.1s;
   transition: 0.1s;
@@ -188,7 +199,7 @@ h1 {
 
 .delete-icon:hover {
   color: #242424;
-  background-color: #2ca0ff;
+  background-color: #80c6ffc2;
 }
 
 .delete-icon:active {
@@ -200,20 +211,22 @@ h1 {
 }
 
 .edit-icon {
-  border-radius: 50%;
-  padding: 3px;
   color: black;
+  padding: 2px;
+  height: 1em;
+  width: 1em;
+  border-radius: 50%;
   -webkit-transition: 0.1s;
   transition: 0.1s;
 }
 
 .edit-icon:hover {
   color: #242424;
-  background-color: #2ca0ff;
+  background-color: #80c6ffc2;
 }
 
 .edit-icon:active {
-  background-color: #6ecaff;
+  background-color: #1fadff;
   position: relative;
   top: 4px;
   -webkit-box-shadow: none;

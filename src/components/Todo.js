@@ -1,8 +1,32 @@
-import React, { useState, } from 'react'
+import React, { useState } from 'react'
 import TodoForm from './TodoForm'
-import { RiCloseCircleLine } from 'react-icons/ri'
-import { TiEdit } from 'react-icons/ti'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { RiDeleteBinLine } from 'react-icons/ri'
+import { FaRegEdit } from "react-icons/fa";
+
+import { Draggable } from 'react-beautiful-dnd';
+
+// function to help us with reordering the result
+export const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+
+    return result;
+};
+
+export const getItemStyle = (isDragging, draggableStyle) => ({
+    // basic styles to make the items look a bit nicer
+    userSelect: "none",
+    width: "100%",
+    padding: "5px",
+
+
+    // change background colour if dragging
+    background: isDragging ? "lightgreen" : "white",
+    boxShadow: isDragging ? "0 0 .4 rem #666" : "none",
+    // styles we need to apply on draggables
+    ...draggableStyle
+});
 
 function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
     const [edit, setEdit] = useState({
@@ -18,25 +42,44 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
         })
     }
 
+
     if (edit.id) {
         return <TodoForm edit={edit} onSubmit={submitUpdate} />;
     }
 
-    return todos.map((todo, index) => (
-        <div className={todo.isComplete ? 'todo-row complete' : 'todo-row'} key={index}>
+    return (
+        todos.map((todo, index) =>
+            <div key={todo.id} className={todo.isComplete ? 'todo-row complete' : 'todo-row'} >
+                <Draggable key={todo.id} draggableId={todo.id} index={index}>
+                    {(provided, snapshot) => (
+                        <div className="list-item" ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={getItemStyle(
 
-            <div key={todo.id} onClick={() => completeTodo(todo.id)}>
-                {todo.text}
-            </div>
-            <div className="icons">
-                <RiCloseCircleLine onClick={() => removeTodo(todo.id)}
-                    className='delete-icon'
-                />
-                <TiEdit onClick={() => setEdit({ id: todo.id, value: todo.text })} className="edit-icon" />
-            </div>
-        </div>
+                                snapshot.isDragging,
+                                provided.draggableProps.style
+                            )}>
 
-    ))
+                            <div className="todo-text" key={todo.id} onClick={() => completeTodo(todo.id)}>
+                                {todo.text}
+                            </div>
+                            <div className="icons">
+                                <div className='delete-icon'>
+                                    <RiDeleteBinLine size={28} onClick={() => removeTodo(todo.id)}
+
+                                    />
+                                </div>
+                                <div className="edit-icon">
+                                    <FaRegEdit size={28} onClick={() => setEdit({ id: todo.id, value: todo.text })} />
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </Draggable >
+            </div >
+        )
+    )
 }
 
 export default Todo

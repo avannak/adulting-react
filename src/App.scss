@@ -16,6 +16,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: start;
+  min-width: 95vw;
   max-width: 95vw;
   min-height: 600px;
   background: #161a2b;
@@ -61,8 +62,8 @@ body {
   &:active {
     background: linear-gradient(
       90deg,
-      rgb(187, 221, 250) 0%,
-      rgb(109, 197, 255) 20%
+      rgb(187, 221, 250) 20%,
+      rgb(109, 197, 255) 60%
     );
     position: relative;
     top: 4px;
@@ -96,7 +97,9 @@ body {
     border: 2px solid #ffbe0c;
   }
 }
-
+.todo-text {
+  padding: 3px;
+}
 .todo-input.edit {
   border: 2px solid #149fff;
 }
@@ -120,7 +123,6 @@ body {
 }
 
 .todo-row {
-  overflow: auto;
   overflow-wrap: break-word;
   word-wrap: break-word;
   font-size: 18px;
@@ -129,16 +131,14 @@ body {
   align-items: center;
   margin: 4px auto;
   color: rgb(0, 0, 0);
-  background: linear-gradient(
-    90deg,
-    rgb(247, 247, 247) 0%,
-    rgb(248, 248, 248) 100%
-  );
-
-  padding: 5px;
+  padding: 3px;
   border-radius: 5px;
   width: 90%;
 }
+.list-item {
+  border-radius: 8px;
+}
+
 h1 {
   color: aliceblue;
   font-family: "Inconsolata", monospace;
@@ -150,6 +150,7 @@ h1 {
 .icons {
   display: flex;
   align-items: center;
+  justify-content: end;
   font-size: 36px;
   cursor: pointer;
 }
@@ -157,13 +158,15 @@ h1 {
 .delete-icon {
   margin-right: 5px;
   color: rgb(0, 0, 0);
+  padding: 2px;
+  height: 1em;
+  width: 1em;
   border-radius: 50%;
-  padding: 3px;
   color: rgb(0, 0, 0);
   transition: 0.1s;
   &:hover {
     color: #242424;
-    background-color: #2ca0ff;
+    background-color: #80c6ffc2;
   }
   &:active {
     background-color: #6ecaff;
@@ -174,16 +177,18 @@ h1 {
 }
 
 .edit-icon {
-  border-radius: 50%;
-  padding: 3px;
   color: rgb(0, 0, 0);
+  padding: 2px;
+  height: 1em;
+  width: 1em;
+  border-radius: 50%;
   transition: 0.1s;
   &:hover {
     color: #242424;
-    background-color: #2ca0ff;
+    background-color: #80c6ffc2;
   }
   &:active {
-    background-color: #6ecaff;
+    background-color: #1fadff;
     position: relative;
     top: 4px;
     box-shadow: none;

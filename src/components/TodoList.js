@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TodoForm from './TodoForm';
 import Todo from './Todo';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 function TodoList() {
     const [todos, setTodos] = useState([]);
@@ -40,9 +40,24 @@ function TodoList() {
             <h1>What is today's plan?</h1>
             <TodoForm onSubmit={addTodo} />
 
-
-            <Todo todos={todos} completeTodo={completeTodo} removeTodo={removeTodo} updateTodo={updateTodo} />
-
+            <DragDropContext onDragEnd={(param) => {
+                const srcI = param.source.index;
+                const desI = param.destination.index;
+                todos.splice(desI, 0, todos.splice(srcI, 1)[0]);
+                // console.log(param);
+            }}>
+                <Droppable droppableId="droppable-1">
+                    {(provided, snapshot) => (
+                        <div
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
+                        >
+                            <Todo todos={todos} completeTodo={completeTodo} removeTodo={removeTodo} updateTodo={updateTodo} />
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
+            </DragDropContext>
         </div>
     );
 }
