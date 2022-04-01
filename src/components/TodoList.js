@@ -4,6 +4,9 @@ import Todo from './Todo';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 let taskMsg = '';
+let updatedMsg = '';
+let newMsg = '';
+let btnType = '';
 
 function TodoList() {
     const [stateToggled, setStatusState] = useState(false);
@@ -30,30 +33,43 @@ function TodoList() {
         // localstorage anytime the todos state changes
     }, [todos]);
 
-    const toggleStatus = () => {
+    const changeStatus = () => {
         setStatusState(true);
-        console.log(stateToggled);
         setTimeout(function () {
             setStatusState(false);
         }.bind(stateToggled), 1500);
     }
     const addTodo = todo => {
+        btnType = addTodo.name;
         if (!todo.text || /^\s*$/.test(todo.text)) {
             return;
         }
         const newTodos = [todo, ...todos];
         setTodos(newTodos);
         taskMsg = todo.text;
-        toggleStatus();
+        changeStatus();
         console.log(todo, ...todos);
     };
 
-    const getStatusMsg = (message) => {
+    const getStatusMsg = (message, buttonType) => {
         let taskMsg = message;
+        if (buttonType === "removeTodo") {
+            return `removed "${taskMsg}" from the list`;
+        }
+        if (buttonType === "addTodo") {
+            return `added "${taskMsg}" to the list`;
+        }
+        if (buttonType === "updateTodo") {
+            return `updated "${updatedMsg}" to "${newMsg}"`;
+        }
         return `added "${taskMsg}" to the list`;
     }
 
-    const updateTodo = (todoId, newValue) => {
+    const updateTodo = (todoId, newValue, prevValue) => {
+        updatedMsg = prevValue;
+        newMsg = newValue.text;
+        btnType = updateTodo.name;
+        changeStatus();
         if (!newValue.text || /^\s*$/.test(newValue.text)) {
             return;
         }
@@ -61,7 +77,7 @@ function TodoList() {
         setTodos(prev => prev.map(item => (item.id === todoId ? newValue : item)))
         taskMsg = newValue;
     }
-    const completeTodo = id => {
+    const completeTodo = (id, text) => {
         let updatedTodos = todos.map(todo => {
             if (todo.id === id) {
                 todo.isComplete = !todo.isComplete;
@@ -70,7 +86,12 @@ function TodoList() {
         });
         setTodos(updatedTodos);
     }
-    const removeTodo = id => {
+    const removeTodo = (id, text) => {
+
+        console.log("text is: ", text);
+        taskMsg = text;
+        btnType = removeTodo.name;
+        changeStatus();
         const removeArr = [...todos].filter(todo => todo.id !== id);
         setTodos(removeArr);
     }
@@ -79,7 +100,7 @@ function TodoList() {
         <div>
             <h1>What is today's plan?</h1>
             <TodoForm onSubmit={addTodo} />
-            <h1 className={stateToggled ? "list-status active" : "list-status inactive"}>{getStatusMsg(taskMsg)}</h1>
+            <h1 className={stateToggled ? "list-status active" : "list-status inactive"}>{getStatusMsg(taskMsg, btnType)}</h1>
             <DragDropContext onDragEnd={(param) => {
                 const srcI = param.source.index;
                 const desI = param.destination.index;

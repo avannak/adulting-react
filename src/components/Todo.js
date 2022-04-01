@@ -5,6 +5,9 @@ import { FaRegEdit } from "react-icons/fa";
 
 import { Draggable } from 'react-beautiful-dnd';
 
+let removeTxt = '';
+let completeTxt = '';
+let updateTxt = '';
 // function to help us with reordering the result
 export const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
@@ -36,7 +39,9 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
 
 
     const submitUpdate = value => {
-        updateTodo(edit.id, value)
+        let prevValue = updateTxt;
+        updateTodo(edit.id, value, prevValue)
+        // console.log("AMAMAMAM:", prevValue);
         setEdit({
             id: null,
             value: ''
@@ -63,17 +68,20 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
                                 provided.draggableProps.style
                             )}>
 
-                            <div className="todo-text" key={todo.id} onClick={() => completeTodo(todo.id)}>
+                            <div className="todo-text" key={todo.id} onClick={() => completeTodo(todo.id, completeTxt = todo.text)}>
                                 {todo.text}
                             </div>
                             <div className="icons">
                                 <div className='delete-icon'>
-                                    <RiDeleteBinLine size={28} onClick={() => removeTodo(todo.id)}
+                                    <RiDeleteBinLine size={28} onClick={() => removeTodo(todo.id, removeTxt = todo.text)}
 
                                     />
                                 </div>
                                 <div className="edit-icon">
-                                    <FaRegEdit size={28} onClick={() => setEdit({ id: todo.id, value: todo.text })} />
+                                    <FaRegEdit size={28} onClick={() => {
+                                        setEdit({ id: todo.id, value: todo.text });
+                                        updateTxt = todo.text;
+                                    }} />
                                 </div>
                             </div>
                         </div>
