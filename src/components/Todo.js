@@ -5,6 +5,7 @@ import { FaRegEdit } from "react-icons/fa";
 
 import { Draggable } from 'react-beautiful-dnd';
 
+let btnType;
 export let removeTxt;
 export let completeTxt;
 export let updateTxt;
@@ -73,7 +74,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
                             </div>
                             <div className="icons">
                                 <div className='delete-icon'>
-                                    <RiDeleteBinLine size={28} onClick={() => removeTodo(todo.id, removeTxt = todo.text)}
+                                    <RiDeleteBinLine size={28} onClick={() => removeTodo(todo.id, removeTxt = todo.text, btnType = "removeTodo")}
 
                                     />
                                 </div>
@@ -81,6 +82,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
                                     <FaRegEdit size={28} onClick={() => {
                                         setEdit({ id: todo.id, value: todo.text });
                                         updateTxt = todo.text;
+
                                     }} />
                                 </div>
                             </div>
