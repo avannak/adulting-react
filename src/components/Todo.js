@@ -69,19 +69,19 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
                                 provided.draggableProps.style
                             )}>
 
-                            <div className="todo-text" key={todo.id} onClick={() => completeTodo(todo.id, completeTxt = todo.text)}>
+                            <div className="todo-text" key={todo.id} onClick={() => completeTodo(todo.id, completeTxt = todo.text.replace(/\s+/g, ' ').trim())}>
                                 {todo.text}
                             </div>
                             <div className="icons">
                                 <div className='delete-icon'>
-                                    <RiDeleteBinLine size={28} onClick={() => removeTodo(todo.id, removeItem = todo.text)}
+                                    <RiDeleteBinLine size={28} onClick={() => removeTodo(todo.id, removeItem = todo.text.replace(/\s+/g, ' ').trim())}
 
                                     />
                                 </div>
                                 <div className="edit-icon">
                                     <FaRegEdit size={28} onClick={() => {
-                                        setEdit({ id: todo.id, value: todo.text });
-                                        updateItem = todo.text;
+                                        setEdit({ id: todo.id, value: todo.text.replace(/\s+/g, ' ').trim() });
+                                        updateItem = todo.text.replace(/\s+/g, ' ').trim();
 
                                     }} />
                                 </div>
