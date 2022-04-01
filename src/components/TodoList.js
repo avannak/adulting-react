@@ -6,7 +6,7 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 // export let btnType;
 export let taskItem;
 let btnType;
-export let updatedMsg;
+let updatedMsg;
 export let newMsg;
 
 function TodoList() {
@@ -78,7 +78,7 @@ function TodoList() {
         newMsg = newValue.text;
         // btnType = updateTodo.name;
         // console.log("btnType is: ", btnType);
-        changeStatus();
+        changeStatus(updatedMsg, "updateTodo");
         if (!newValue.text || /^\s*$/.test(newValue.text)) {
             return;
         }

@@ -8,7 +8,7 @@ import { Draggable } from 'react-beautiful-dnd';
 let btnType;
 export let removeItem;
 export let completeTxt;
-export let updateTxt;
+export let updateItem;
 // function to help us with reordering the result
 export const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
@@ -40,7 +40,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
 
 
     const submitUpdate = value => {
-        let prevValue = updateTxt;
+        let prevValue = updateItem;
         updateTodo(edit.id, value, prevValue)
         // console.log("AMAMAMAM:", prevValue);
         setEdit({
@@ -81,7 +81,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
                                 <div className="edit-icon">
                                     <FaRegEdit size={28} onClick={() => {
                                         setEdit({ id: todo.id, value: todo.text });
-                                        updateTxt = todo.text;
+                                        updateItem = todo.text;
 
                                     }} />
                                 </div>
