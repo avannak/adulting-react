@@ -52,8 +52,8 @@ body {
   border-radius: 0 4px 4px 0;
   cursor: pointer;
   outline: none;
-  background: -webkit-gradient(linear, left top, right top, from(#0c92ff), to(#6dc5ff));
-  background: linear-gradient(90deg, #0c92ff 0%, #6dc5ff 100%);
+  background: -webkit-gradient(linear, left top, right top, from(#0c92ff), to(#5e96fd));
+  background: linear-gradient(90deg, #0c92ff 0%, #5e96fd 100%);
   color: #fff;
   text-transform: capitalize;
   opacity: 1;
@@ -70,8 +70,8 @@ body {
 }
 
 .todo-button:active {
-  background: -webkit-gradient(linear, left top, right top, color-stop(20%, #bbddfa), color-stop(60%, #6dc5ff));
-  background: linear-gradient(90deg, #bbddfa 20%, #6dc5ff 60%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(20%, #87c4fa), color-stop(60%, #6dc5ff));
+  background: linear-gradient(90deg, #87c4fa 20%, #6dc5ff 60%);
   position: relative;
   top: 4px;
   -webkit-box-shadow: none;
@@ -115,6 +115,51 @@ body {
 
 .todo-input.edit {
   border: 2px solid #149fff;
+}
+
+.list-status {
+  font-family: "Inconsolata", monospace;
+  font-size: 1rem;
+  font-weight: bolder;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  color: #fff;
+}
+
+.inactive {
+  visibility: hidden;
+}
+
+.active {
+  visibility: visible;
+  -webkit-animation: fade-inout .5s;
+          animation: fade-inout .5s;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+}
+
+@-webkit-keyframes fade-inout {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-inout {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .todo-button.edit {

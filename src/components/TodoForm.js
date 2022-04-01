@@ -19,6 +19,7 @@ function TodoForm(props) {
             id: v4(),
             text: input,
         });
+
         setInput('');
     };
     return (

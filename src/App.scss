@@ -42,7 +42,7 @@ body {
   background: linear-gradient(
     90deg,
     rgb(12, 146, 255) 0%,
-    rgb(109, 197, 255) 100%
+    rgb(94, 150, 253) 100%
   );
   color: #fff;
   text-transform: capitalize;
@@ -62,7 +62,7 @@ body {
   &:active {
     background: linear-gradient(
       90deg,
-      rgb(187, 221, 250) 20%,
+      rgb(135, 196, 250) 20%,
       rgb(109, 197, 255) 60%
     );
     position: relative;
@@ -102,6 +102,30 @@ body {
 }
 .todo-input.edit {
   border: 2px solid #149fff;
+}
+
+.list-status{
+  font-family: "Inconsolata", monospace;
+  font-size: 1rem;
+  font-weight: bolder;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  color: #fff;
+}
+.inactive{
+  visibility: hidden;
+}
+.active{
+  visibility: visible;
+  animation: fade-inout .5s;
+  animation-iteration-count: 1;
+}
+@keyframes fade-inout {
+  
+  0%{opacity: 0;}
+  50%{opacity: 0;}
+  100%{opacity: 1;}
+  
 }
 
 .todo-button.edit {
