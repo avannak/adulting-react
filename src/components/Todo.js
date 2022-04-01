@@ -5,9 +5,9 @@ import { FaRegEdit } from "react-icons/fa";
 
 import { Draggable } from 'react-beautiful-dnd';
 
-let removeTxt = '';
-let completeTxt = '';
-let updateTxt = '';
+export let removeTxt;
+export let completeTxt;
+export let updateTxt;
 // function to help us with reordering the result
 export const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);

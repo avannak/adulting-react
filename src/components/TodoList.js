@@ -3,12 +3,12 @@ import TodoForm from './TodoForm';
 import Todo from './Todo';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-let taskMsg = '';
-let updatedMsg = '';
-let newMsg = '';
-let btnType = '';
 
 function TodoList() {
+    let taskMsg;
+    let updatedMsg;
+    let newMsg;
+    let btnType;
     const [stateToggled, setStatusState] = useState(false);
     const [todos, setTodos] = useState(() => {
         // get the todos from localstorage
@@ -97,6 +97,7 @@ function TodoList() {
     }
     // "list-status active"
     return (
+
         <div>
             <h1>What is today's plan?</h1>
             <TodoForm onSubmit={addTodo} />
