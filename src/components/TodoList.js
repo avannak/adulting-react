@@ -9,6 +9,7 @@ export let updatedMsg;
 export let newMsg;
 
 function TodoList() {
+
     const [stateToggled, setStatusState] = useState(false);
     const [todos, setTodos] = useState(() => {
         // get the todos from localstorage
@@ -41,6 +42,7 @@ function TodoList() {
     }
     const addTodo = todo => {
         btnType = addTodo.name;
+        console.log("btnType is: ", btnType);
         if (!todo.text || /^\s*$/.test(todo.text)) {
             return;
         }
@@ -52,7 +54,6 @@ function TodoList() {
     };
 
     const getStatusMsg = (message, buttonType) => {
-        console.log("buttonType is: ", buttonType);
         let taskMsg = message;
         if (buttonType === "removeTodo") {
             return `removed "${taskMsg}" from the list`;
@@ -70,6 +71,7 @@ function TodoList() {
         updatedMsg = prevValue;
         newMsg = newValue.text;
         btnType = updateTodo.name;
+        console.log("btnType is: ", btnType);
         changeStatus();
         if (!newValue.text || /^\s*$/.test(newValue.text)) {
             return;
@@ -89,6 +91,7 @@ function TodoList() {
     }
     const removeTodo = (id, text) => {
         btnType = removeTodo.name;
+        console.log("btnType is: ", btnType);
         console.log("text is: ", text);
         taskMsg = text;
 
