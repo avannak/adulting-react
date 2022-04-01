@@ -6,7 +6,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { Draggable } from 'react-beautiful-dnd';
 
 let btnType;
-export let removeTxt;
+export let removeItem;
 export let completeTxt;
 export let updateTxt;
 // function to help us with reordering the result
@@ -74,7 +74,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
                             </div>
                             <div className="icons">
                                 <div className='delete-icon'>
-                                    <RiDeleteBinLine size={28} onClick={() => removeTodo(todo.id, removeTxt = todo.text, btnType = "removeTodo")}
+                                    <RiDeleteBinLine size={28} onClick={() => removeTodo(todo.id, removeItem = todo.text)}
 
                                     />
                                 </div>

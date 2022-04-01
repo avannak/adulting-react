@@ -3,12 +3,14 @@ import TodoForm from './TodoForm';
 import Todo from './Todo';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-export let btnType;
-export let taskMsg;
+// export let btnType;
+export let taskItem;
+let btnType;
 export let updatedMsg;
 export let newMsg;
 
 function TodoList() {
+
 
     const [stateToggled, setStatusState] = useState(false);
     const [todos, setTodos] = useState(() => {
@@ -34,51 +36,55 @@ function TodoList() {
         // localstorage anytime the todos state changes
     }, [todos]);
 
-    const changeStatus = () => {
+    const changeStatus = (message, buttonType) => {
+        taskItem = message;
+        btnType = buttonType;
+        // getStatusMsg(message, buttonType);
         setStatusState(true);
         setTimeout(function () {
             setStatusState(false);
         }.bind(stateToggled), 1500);
     }
     const addTodo = todo => {
-        btnType = addTodo.name;
-        console.log("btnType is: ", btnType);
+        // btnType = addTodo.name;
+        // console.log("btnType is: ", btnType);
         if (!todo.text || /^\s*$/.test(todo.text)) {
             return;
         }
         const newTodos = [todo, ...todos];
         setTodos(newTodos);
-        taskMsg = todo.text;
-        changeStatus();
+        taskItem = todo.text;
+        changeStatus(todo.text, "addTodo");
         console.log(todo, ...todos);
     };
 
     const getStatusMsg = (message, buttonType) => {
-        let taskMsg = message;
-        if (buttonType === "removeTodo") {
-            return `removed "${taskMsg}" from the list`;
+        let tskItem = message;
+        let statusBtnType = buttonType;
+        if (statusBtnType === "removeTodo") {
+            return `removed "${tskItem}" from the list`;
         }
-        if (buttonType === "addTodo") {
-            return `added "${taskMsg}" to the list`;
+        if (statusBtnType === "addTodo") {
+            return `added "${tskItem}" to the list`;
         }
-        if (buttonType === "updateTodo") {
+        if (statusBtnType === "updateTodo") {
             return `updated "${updatedMsg}" to "${newMsg}"`;
         }
-        return `added "${taskMsg}" to the list`;
+        return `added "${taskItem}" to the list`;
     }
 
     const updateTodo = (todoId, newValue, prevValue) => {
         updatedMsg = prevValue;
         newMsg = newValue.text;
-        btnType = updateTodo.name;
-        console.log("btnType is: ", btnType);
+        // btnType = updateTodo.name;
+        // console.log("btnType is: ", btnType);
         changeStatus();
         if (!newValue.text || /^\s*$/.test(newValue.text)) {
             return;
         }
 
         setTodos(prev => prev.map(item => (item.id === todoId ? newValue : item)))
-        taskMsg = newValue;
+        taskItem = newValue;
     }
     const completeTodo = (id, text) => {
         let updatedTodos = todos.map(todo => {
@@ -90,12 +96,13 @@ function TodoList() {
         setTodos(updatedTodos);
     }
     const removeTodo = (id, text) => {
-        btnType = removeTodo.name;
-        console.log("btnType is: ", btnType);
-        console.log("text is: ", text);
-        taskMsg = text;
 
-        changeStatus();
+        // btnType = removeTodo.name;
+        // console.log("btnType is: ", btnType);
+        console.log("text is: ", text);
+        taskItem = text;
+
+        changeStatus(text, "removeTodo");
         const removeArr = [...todos].filter(todo => todo.id !== id);
         setTodos(removeArr);
     }
@@ -104,7 +111,7 @@ function TodoList() {
         <div>
             <h1>What is today's plan?</h1>
             <TodoForm onSubmit={addTodo} />
-            <h1 className={stateToggled ? "list-status active" : "list-status inactive"}>{getStatusMsg(taskMsg, btnType)}</h1>
+            <h1 className={stateToggled ? "list-status active" : "list-status inactive"}>{getStatusMsg(taskItem, btnType)}</h1>
             <DragDropContext onDragEnd={(param) => {
                 const srcI = param.source.index;
                 const desI = param.destination.index;
