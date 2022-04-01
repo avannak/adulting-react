@@ -36,14 +36,20 @@ function TodoList() {
         // localstorage anytime the todos state changes
     }, [todos]);
 
+
     const changeStatus = (message, buttonType) => {
+        const setStateToFalse = () => {
+            setStatusState(false);
+        }
         taskItem = message;
         btnType = buttonType;
         // getStatusMsg(message, buttonType);
         setStatusState(true);
-        setTimeout(function () {
-            setStatusState(false);
-        }.bind(stateToggled), 1500);
+        console.log("setStatusState is: ", stateToggled);
+        if (!stateToggled) {
+            setTimeout(function () { setStateToFalse(); }, 5000);
+        }
+        console.log("setStatusState is: ", stateToggled);
     }
     const addTodo = todo => {
         // btnType = addTodo.name;
@@ -53,7 +59,7 @@ function TodoList() {
         }
         const newTodos = [todo, ...todos];
         setTodos(newTodos);
-        taskItem = todo.text;
+        taskItem = todo.text.replace(/\s+/g, ' ').trim();
         changeStatus(todo.text, "addTodo");
         console.log(todo, ...todos);
     };
@@ -74,8 +80,8 @@ function TodoList() {
     }
 
     const updateTodo = (todoId, newValue, prevValue) => {
-        updatedMsg = prevValue;
-        newMsg = newValue.text;
+        updatedMsg = prevValue.replace(/\s+/g, ' ').trim();
+        newMsg = newValue.text.replace(/\s+/g, ' ').trim();
         // btnType = updateTodo.name;
         // console.log("btnType is: ", btnType);
         changeStatus(updatedMsg, "updateTodo");
@@ -100,7 +106,7 @@ function TodoList() {
         // btnType = removeTodo.name;
         // console.log("btnType is: ", btnType);
         console.log("text is: ", text);
-        taskItem = text;
+        taskItem = text.replace(/\s+/g, ' ').trim();
 
         changeStatus(text, "removeTodo");
         const removeArr = [...todos].filter(todo => todo.id !== id);

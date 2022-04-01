@@ -114,17 +114,19 @@ body {
 }
 .inactive{
   visibility: hidden;
+  animation: fade-out 2s;
+  animation-iteration-count: 1;
 }
 .active{
   visibility: visible;
-  animation: fade-inout .5s;
-  animation-iteration-count: 1;
+  // animation: fade-inout .5s;
+  // animation-iteration-count: 1;
 }
-@keyframes fade-inout {
+@keyframes fade-out {
   
-  0%{opacity: 0;}
-  50%{opacity: 0;}
-  100%{opacity: 1;}
+  0%{opacity: 1;}
+  50%{opacity: .5;}
+  100%{opacity: 0;}
   
 }
 

@@ -128,37 +128,37 @@ body {
 
 .inactive {
   visibility: hidden;
-}
-
-.active {
-  visibility: visible;
-  -webkit-animation: fade-inout .5s;
-          animation: fade-inout .5s;
+  -webkit-animation: fade-out 2s;
+          animation: fade-out 2s;
   -webkit-animation-iteration-count: 1;
           animation-iteration-count: 1;
 }
 
-@-webkit-keyframes fade-inout {
+.active {
+  visibility: visible;
+}
+
+@-webkit-keyframes fade-out {
   0% {
-    opacity: 0;
+    opacity: 1;
   }
   50% {
-    opacity: 0;
+    opacity: .5;
   }
   100% {
-    opacity: 1;
+    opacity: 0;
   }
 }
 
-@keyframes fade-inout {
+@keyframes fade-out {
   0% {
-    opacity: 0;
+    opacity: 1;
   }
   50% {
-    opacity: 0;
+    opacity: .5;
   }
   100% {
-    opacity: 1;
+    opacity: 0;
   }
 }
 
