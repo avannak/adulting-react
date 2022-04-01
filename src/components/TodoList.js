@@ -3,12 +3,12 @@ import TodoForm from './TodoForm';
 import Todo from './Todo';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
+export let btnType;
+export let taskMsg;
+export let updatedMsg;
+export let newMsg;
 
 function TodoList() {
-    let taskMsg;
-    let updatedMsg;
-    let newMsg;
-    let btnType;
     const [stateToggled, setStatusState] = useState(false);
     const [todos, setTodos] = useState(() => {
         // get the todos from localstorage
@@ -52,6 +52,7 @@ function TodoList() {
     };
 
     const getStatusMsg = (message, buttonType) => {
+        console.log("buttonType is: ", buttonType);
         let taskMsg = message;
         if (buttonType === "removeTodo") {
             return `removed "${taskMsg}" from the list`;
@@ -87,17 +88,16 @@ function TodoList() {
         setTodos(updatedTodos);
     }
     const removeTodo = (id, text) => {
-
+        btnType = removeTodo.name;
         console.log("text is: ", text);
         taskMsg = text;
-        btnType = removeTodo.name;
+
         changeStatus();
         const removeArr = [...todos].filter(todo => todo.id !== id);
         setTodos(removeArr);
     }
     // "list-status active"
     return (
-
         <div>
             <h1>What is today's plan?</h1>
             <TodoForm onSubmit={addTodo} />
