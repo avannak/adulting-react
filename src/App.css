@@ -203,6 +203,11 @@ body {
 }
 
 .list-status {
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
   text-shadow: 3px 3px 3px black;
   font-family: "Inconsolata", monospace;
   font-size: 1rem;
@@ -223,6 +228,11 @@ img.animated-gif {
 }
 
 .drag-notification {
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -239,6 +249,11 @@ img.animated-gif {
 }
 
 .word-counter {
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
   text-shadow: 3px 3px 3px black;
   display: -webkit-box;
   display: -ms-flexbox;

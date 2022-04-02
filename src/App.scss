@@ -172,6 +172,11 @@ padding: 0px;
 }
 
 .list-status{
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
   text-shadow: 3px 3px 3px black;
   font-family: "Inconsolata", monospace;
   font-size: 1rem;
@@ -190,6 +195,11 @@ img.animated-gif{
   height: auto;
 }
 .drag-notification{
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
   display: flex;
   justify-content:center;
   font-family: "Inconsolata", monospace;
@@ -201,6 +211,11 @@ img.animated-gif{
   padding: 5px;
 }
 .word-counter{
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
   text-shadow: 3px 3px 3px black;
   display: flex;
   justify-content:center;
