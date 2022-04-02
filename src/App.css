@@ -164,15 +164,10 @@ body {
 }
 
 .todo-form {
-  padding: 0px;
+  padding: 0;
 }
 
 .todo-input {
-  -webkit-user-drag: none;
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
   font-family: "Inconsolata", monospace;
   font-size: 1rem;
   font-weight: bolder;
