@@ -122,14 +122,14 @@ function TodoList() {
     // "list-status active"
     return (
         <div>
-            <h1>What is today's plan?</h1>
+            <h1 id="title-text">What is today's plan?</h1>
             <div className="form-container">
                 <button onClick={getDraggableNotif} className="info-button">
                     <RiInformationLine size={20}></RiInformationLine>
                 </button>
                 <TodoForm onSubmit={addTodo} />
             </div>
-            <div class={dragNotifToggled ? "drag-notification active" : "drag-notification inactive"}>
+            <div className={dragNotifToggled ? "drag-notification active" : "drag-notification inactive"}>
                 <img draggable="false" className="animated-gif" src={adulting} alt="This will display an animated GIF" />
                 Hold and drag to re-arrange tasks!</div>
             <h1 className={stateToggled ? "list-status active" : "list-status inactive"}>{getStatusMsg(taskItem, btnType)}</h1>

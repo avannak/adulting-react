@@ -1,6 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200&family=Outfit:wght@300&display=swap");
 $main-color: #e4594f;
 
+#title-text{
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  font-size: 1.5em;
+  font-weight: bolder;
+  text-shadow: 2px 2px 2px rgb(0, 0, 0);
+}
 body {
   font-family: "Inconsolata", monospace;
   font-size: 1.5em;
@@ -21,10 +31,10 @@ body {
   min-height: 600px;
   background: #161a2b;
   text-align: center;
-  margin: 128px auto;
+  margin: 12px auto;
   border-radius: 10px;
   padding-bottom: 32px;
-  box-shadow: 2px 2px 20px;
+  box-shadow: 2px 10px 10px rgba(0, 0, 0, 0.753);
 }
 .form-container{
   display: flex;
@@ -32,9 +42,14 @@ body {
   justify-content: center;
 }
 .info-button{
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
   color: rgb(12, 146, 255);
   background: transparent;
-  box-shadow: 0px 0px 0px transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.295);
   border: 0px solid transparent;
   text-shadow: 0px 0px 0px transparent;
   -webkit-appearance: none;
@@ -63,11 +78,17 @@ body {
 .drag-notification{
 padding: 0;
 }
-.todo-button {
+.todo-button{
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
   font-family: "Inconsolata", monospace;
   font-size: 1rem;
   font-weight: bolder;
   padding: 15px;
+  box-shadow: 3px 3px 3px black;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -106,6 +127,10 @@ padding: 0;
     box-shadow: none;
   }
 }
+// .todo-button.edit {
+
+// }
+
 .complete {
   text-decoration: line-through;
   opacity: 0.4;
@@ -115,6 +140,11 @@ padding: 0;
 padding: 0px;
 }
 .todo-input {
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
   font-family: "Inconsolata", monospace;
   font-size: 1rem;
   font-weight: bolder;
@@ -122,6 +152,7 @@ padding: 0px;
   word-wrap: break-word;
   padding: 13px 32px 13px 16px;
   border-radius: 4px 0 0 4px;
+  box-shadow: 3px 3px 3px black;
   border: 2px solid #0c92ff;
   outline: none;
   width: 60%;
@@ -141,6 +172,7 @@ padding: 0px;
 }
 
 .list-status{
+  text-shadow: 3px 3px 3px black;
   font-family: "Inconsolata", monospace;
   font-size: 1rem;
   font-weight: bolder;
@@ -169,6 +201,7 @@ img.animated-gif{
   padding: 5px;
 }
 .word-counter{
+  text-shadow: 3px 3px 3px black;
   display: flex;
   justify-content:center;
   font-family: "Inconsolata", monospace;
@@ -198,16 +231,6 @@ img.animated-gif{
   
 }
 
-.todo-button.edit {
-  background: linear-gradient(
-    90deg,
-    rgba(20, 159, 255, 1) 0%,
-    rgba(17, 122, 255, 1) 100%
-  );
-
-  padding: 16px 22px;
-}
-
 .todo-container {
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -230,10 +253,12 @@ img.animated-gif{
   width: 90%;
 }
 .list-item {
+  box-shadow: 4px 4px 4px black;
   border-radius: 8px;
 }
 
 h1 {
+  text-shadow: 5px 5px 5px rgb(0, 0, 0);
   color: aliceblue;
   font-family: "Inconsolata", monospace;
 }
