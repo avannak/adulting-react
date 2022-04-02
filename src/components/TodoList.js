@@ -2,17 +2,18 @@ import React, { useState, useEffect } from 'react';
 import TodoForm from './TodoForm';
 import Todo from './Todo';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import adulting from './assets/gifs/adulting-demo.gif';
+import { RiInformationLine } from 'react-icons/ri'
 
-// export let btnType;
-export let taskItem;
+let taskItem;
 let btnType;
 let updatedMsg;
-export let newMsg;
+let newMsg;
 
 function TodoList() {
 
-
     const [stateToggled, setStatusState] = useState(false);
+    const [dragNotifToggled, setDragNotifState] = useState(false);
     const [todos, setTodos] = useState(() => {
         // get the todos from localstorage
         const savedTodos = localStorage.getItem("todos");
@@ -45,11 +46,11 @@ function TodoList() {
         btnType = buttonType;
         // getStatusMsg(message, buttonType);
         setStatusState(true);
-        console.log("setStatusState is: ", stateToggled);
+        // console.log("setStatusState is: ", stateToggled);
         if (!stateToggled) {
             setTimeout(function () { setStateToFalse(); }, 5000);
         }
-        console.log("setStatusState is: ", stateToggled);
+        // console.log("setStatusState is: ", stateToggled);
     }
     const addTodo = todo => {
         // btnType = addTodo.name;
@@ -61,7 +62,7 @@ function TodoList() {
         setTodos(newTodos);
         taskItem = todo.text.replace(/\s+/g, ' ').trim();
         changeStatus(todo.text, "addTodo");
-        console.log(todo, ...todos);
+        // console.log(todo, ...todos);
     };
 
     const getStatusMsg = (message, buttonType) => {
@@ -105,18 +106,32 @@ function TodoList() {
 
         // btnType = removeTodo.name;
         // console.log("btnType is: ", btnType);
-        console.log("text is: ", text);
+        // console.log("text is: ", text);
         taskItem = text.replace(/\s+/g, ' ').trim();
 
         changeStatus(text, "removeTodo");
         const removeArr = [...todos].filter(todo => todo.id !== id);
         setTodos(removeArr);
     }
+    const getDraggableNotif = () => {
+        setDragNotifState(true);
+        if (!dragNotifToggled) {
+            setTimeout(function () { setDragNotifState(false); }, 6000);
+        }
+    }
     // "list-status active"
     return (
         <div>
             <h1>What is today's plan?</h1>
-            <TodoForm onSubmit={addTodo} />
+            <div className="form-container">
+                <button onClick={getDraggableNotif} className="info-button">
+                    <RiInformationLine size={20}></RiInformationLine>
+                </button>
+                <TodoForm onSubmit={addTodo} />
+            </div>
+            <div class={dragNotifToggled ? "drag-notification active" : "drag-notification inactive"}>
+                <img draggable="false" className="animated-gif" src={adulting} alt="This will display an animated GIF" />
+                Hold and drag to re-arrange tasks!</div>
             <h1 className={stateToggled ? "list-status active" : "list-status inactive"}>{getStatusMsg(taskItem, btnType)}</h1>
             <DragDropContext onDragEnd={(param) => {
                 const srcI = param.source.index;
@@ -137,7 +152,7 @@ function TodoList() {
                     )}
                 </Droppable>
             </DragDropContext>
-        </div>
+        </div >
     );
 }
 

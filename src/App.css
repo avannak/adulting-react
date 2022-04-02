@@ -40,11 +40,66 @@ body {
           box-shadow: 2px 2px 20px;
 }
 
+.form-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.info-button {
+  color: #0c92ff;
+  background: transparent;
+  -webkit-box-shadow: 0px 0px 0px transparent;
+          box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  text-shadow: 0px 0px 0px transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  background: transparent;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 0;
+  margin-bottom: 10px;
+  height: 20px;
+  width: 20px;
+}
+
+.info-button:hover {
+  color: #242424;
+  background-color: #58a0ffd8;
+}
+
+.info-button:active {
+  background-color: #1fadff;
+  position: relative;
+  top: 4px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.drag-notification {
+  padding: 0;
+}
+
 .todo-button {
   font-family: "Inconsolata", monospace;
   font-size: 1rem;
   font-weight: bolder;
-  padding: 16px;
+  padding: 15px;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -84,7 +139,7 @@ body {
 }
 
 .todo-form {
-  margin-bottom: 16px;
+  padding: 0px;
 }
 
 .todo-input {
@@ -93,7 +148,7 @@ body {
   font-weight: bolder;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  padding: 14px 32px 14px 16px;
+  padding: 13px 32px 13px 16px;
   border-radius: 4px 0 0 4px;
   border: 2px solid #0c92ff;
   outline: none;
@@ -126,6 +181,32 @@ body {
   color: #fff;
 }
 
+img.animated-gif {
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  width: 120px;
+  height: auto;
+}
+
+.drag-notification {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-family: "Inconsolata", monospace;
+  font-size: 1rem;
+  font-weight: bolder;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  color: #fff;
+  padding: 5px;
+}
+
 .word-counter {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -143,11 +224,10 @@ body {
 }
 
 .inactive {
+  opacity: 0;
+  -webkit-transition: all 1000ms linear 2s;
+  transition: all 1000ms linear 2s;
   visibility: hidden;
-  -webkit-animation: fade-out 2s;
-          animation: fade-out 2s;
-  -webkit-animation-iteration-count: 1;
-          animation-iteration-count: 1;
 }
 
 .active {
@@ -159,7 +239,7 @@ body {
     opacity: 1;
   }
   50% {
-    opacity: .5;
+    opacity: 1;
   }
   100% {
     opacity: 0;
@@ -171,7 +251,7 @@ body {
     opacity: 1;
   }
   50% {
-    opacity: .5;
+    opacity: 1;
   }
   100% {
     opacity: 0;
@@ -224,7 +304,6 @@ body {
 h1 {
   color: aliceblue;
   font-family: "Inconsolata", monospace;
-  margin: 16px 0;
 }
 
 * {
@@ -260,11 +339,11 @@ h1 {
 
 .delete-icon:hover {
   color: #242424;
-  background-color: #80c6ffc2;
+  background-color: #58a0ffd8;
 }
 
 .delete-icon:active {
-  background-color: #6ecaff;
+  background-color: #6ecaff98;
   position: relative;
   top: 4px;
   -webkit-box-shadow: none;
@@ -283,11 +362,11 @@ h1 {
 
 .edit-icon:hover {
   color: #242424;
-  background-color: #80c6ffc2;
+  background-color: #6ecaff;
 }
 
 .edit-icon:active {
-  background-color: #1fadff;
+  background-color: #6ecaff86;
   position: relative;
   top: 4px;
   -webkit-box-shadow: none;

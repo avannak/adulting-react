@@ -2,10 +2,8 @@ import React, { useState } from 'react'
 import TodoForm from './TodoForm'
 import { RiDeleteBinLine } from 'react-icons/ri'
 import { FaRegEdit } from "react-icons/fa";
-
 import { Draggable } from 'react-beautiful-dnd';
 
-let btnType;
 export let removeItem;
 export let completeTxt;
 export let updateItem;
