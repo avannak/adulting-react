@@ -15,7 +15,8 @@ body {
   font-family: "Inconsolata", monospace;
   font-size: 1.5em;
   font-weight: bolder;
-  background: $main-color;
+  background: rgb(228,119,79);
+background: linear-gradient(90deg, rgb(228, 109, 79) 0%, rgb(236, 98, 74) 35%, rgb(236, 90, 79) 100%);
   text-align: center;
   display: flex;
   align-items: center;

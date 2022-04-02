@@ -14,7 +14,9 @@ body {
   font-family: "Inconsolata", monospace;
   font-size: 1.5em;
   font-weight: bolder;
-  background: #e4594f;
+  background: #e4774f;
+  background: -webkit-gradient(linear, left top, right top, from(#e46d4f), color-stop(35%, #ec624a), to(#ec5a4f));
+  background: linear-gradient(90deg, #e46d4f 0%, #ec624a 35%, #ec5a4f 100%);
   text-align: center;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -166,6 +168,11 @@ body {
 }
 
 .todo-input {
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
   font-family: "Inconsolata", monospace;
   font-size: 1rem;
   font-weight: bolder;
