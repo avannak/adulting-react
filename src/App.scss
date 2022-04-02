@@ -76,7 +76,7 @@ body {
 }
 
 .todo-form {
-  margin-bottom: 32px;
+  margin-bottom: 16px;
 }
 .todo-input {
   font-family: "Inconsolata", monospace;
@@ -111,6 +111,17 @@ body {
   overflow-wrap: break-word;
   word-wrap: break-word;
   color: #fff;
+}
+.word-counter{
+  display: flex;
+  justify-content:center;
+  font-family: "Inconsolata", monospace;
+  font-size: 1rem;
+  font-weight: bolder;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  color: #fff;
+  padding: 5px;
 }
 .inactive{
   visibility: hidden;
@@ -168,7 +179,7 @@ body {
 h1 {
   color: aliceblue;
   font-family: "Inconsolata", monospace;
-  margin: 32px 0;
+  margin: 16px 0;
 }
 * {
   box-sizing: border-box;

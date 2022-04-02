@@ -3,14 +3,19 @@ import { v4 } from "uuid";
 
 function TodoForm(props) {
     const [input, setInput] = useState(props.edit ? props.edit.value : '');
+    const [counterStateToggled, setCounterState] = useState(false);
 
     const inputRef = useRef(null)
 
     useEffect(() => {
         inputRef.current.focus()
+        if (input === '') {
+            setCounterState(false);
+        }
     })
 
     const handleChange = (e) => {
+        setCounterState(true);
         setInput(e.target.value);
     }
     const handleSubmit = (e) => {
@@ -19,7 +24,7 @@ function TodoForm(props) {
             id: v4(),
             text: input,
         });
-
+        setCounterState(false);
         setInput('');
     };
     return (
@@ -34,6 +39,7 @@ function TodoForm(props) {
                         className="todo-input edit"
                         onChange={handleChange}
                         ref={inputRef}
+                        maxLength={100}
                     />
                     <button className="todo-button edit">Update</button>
                 </React.Fragment>) :
@@ -47,11 +53,12 @@ function TodoForm(props) {
                             className="todo-input"
                             onChange={handleChange}
                             ref={inputRef}
+                            maxLength={100}
                         />
                         <button className="todo-button">Add Task</button>
                     </React.Fragment>)
             }
-
+            <div style={{ color: "white" }} className={counterStateToggled ? "word-counter active" : "word-counter inactive"}>{100 - input.length} characters left</div>
         </form>
 
     );
