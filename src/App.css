@@ -9,7 +9,9 @@
   font-weight: bolder;
   text-shadow: 2px 2px 2px black;
 }
-
+html{
+  font-size: .9em;
+}
 body {
   font-family: "Inconsolata", monospace;
   font-size: 1.5em;
@@ -84,6 +86,7 @@ body {
   cursor: pointer;
   background: transparent;
   border-radius: 50%;
+  margin-right: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -124,6 +127,8 @@ body {
   font-size: 1rem;
   font-weight: bolder;
   padding: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
   -webkit-box-shadow: 3px 3px 3px black;
           box-shadow: 3px 3px 3px black;
   box-sizing: border-box;
@@ -165,6 +170,7 @@ body {
 }
 
 .todo-form {
+  width: auto;
   padding: 0;
 }
 
@@ -180,7 +186,7 @@ body {
           box-shadow: 3px 3px 3px black;
   border: 2px solid #0c92ff;
   outline: none;
-  width: 55%;
+  width: 39vw;
   background: transparent;
   color: #fff;
   -webkit-transition: 0.2s;

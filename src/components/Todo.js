@@ -29,6 +29,7 @@ export const filterText = (text) => {
 function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
 
     let [currentColor, setCurrentColor] = useState('white');
+
     const [edit, setEdit] = useState({
         id: null,
         value: ''
@@ -36,7 +37,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
 
     const rowRef = useRef('white');
 
-    const getItemStyle = (isDragging, draggableStyle) => ({
+    const getItemStyle = (isDragging, draggableStyle, id) => ({
         // basic styles to make the items look a bit nicer
         userSelect: "none",
         width: "100%",
@@ -88,9 +89,9 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                             style={getItemStyle(
-
                                 snapshot.isDragging,
-                                provided.draggableProps.style
+                                provided.draggableProps.style,
+                                todo.id
                             )}>
 
                             <div className="todo-text" key={todo.id} onClick={() => completeTodo(todo.id, completeTxt = filterText(todo.text))}>
