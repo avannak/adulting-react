@@ -80,12 +80,9 @@ function TodoList() {
     }
 
     const updateTodo = (todoId, newValue, prevValue) => {
-        if (!newValue.text || /^\s*$/.test(newValue.text)) {
-            return;
-        }
         updatedMsg = filterText(prevValue);
         newMsg = filterText(newValue.text);
-        if (updatedMsg === newMsg) {
+        if (!newValue.text || /^\s*$/.test(newValue.text) || updatedMsg === newMsg) {
             return;
         }
         changeStatus(updatedMsg, "updateTodo");
