@@ -60,9 +60,10 @@ background: linear-gradient(90deg, rgb(228, 109, 79) 0%, rgb(236, 98, 74) 35%, r
   background: transparent;
   border-radius: 50%;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   padding: 0;
   margin-bottom: 10px;
+  margin-right:5px;
   height: 20px;
   width: 20px;
   &:hover {
@@ -180,7 +181,7 @@ padding: 0;
   font-weight: bolder;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  color: #fff;
+
 }
 img.animated-gif{
   -webkit-user-drag: none;
@@ -265,6 +266,7 @@ img.animated-gif{
   width: 90%;
 }
 .list-item {
+  background-color: #e4594f;
   border-radius: 8px;
 }
 
@@ -324,6 +326,24 @@ h1 {
   }
 }
 
+.change-color-icon{
+  color: rgb(0, 0, 0);
+  padding: 2px;
+  height: 1em;
+  width: 1em;
+  border-radius: 50%;
+  transition: 0.1s;
+  &:hover {
+    color: #242424;
+    background-color: #6ecaff;
+  }
+  &:active {
+    background-color: #6ecaff86;
+    position: relative;
+    top: 4px;
+    box-shadow: none;
+  }
+}
 html::after {
   content: "";
   background: linear-gradient(21deg, #10abff, #1beabd);

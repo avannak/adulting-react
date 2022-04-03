@@ -87,11 +87,12 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: right;
   padding: 0;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px;
+  margin-right: 5px; */
   height: 20px;
   width: 20px;
 }
@@ -179,7 +180,7 @@ body {
           box-shadow: 3px 3px 3px black;
   border: 2px solid #0c92ff;
   outline: none;
-  width: 60%;
+  width: 55%;
   background: transparent;
   color: #fff;
   -webkit-transition: 0.2s;
@@ -211,7 +212,6 @@ body {
   font-weight: bolder;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  color: #fff;
 }
 
 img.animated-gif {
@@ -336,6 +336,7 @@ img.animated-gif {
 }
 
 .list-item {
+  background-color: #e4594f;
   border-radius: 8px;
 }
 
@@ -405,6 +406,29 @@ h1 {
 }
 
 .edit-icon:active {
+  background-color: #6ecaff86;
+  position: relative;
+  top: 4px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.change-color-icon {
+  color: black;
+  padding: 2px;
+  height: 1em;
+  width: 1em;
+  border-radius: 50%;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
+}
+
+.change-color-icon:hover {
+  color: #242424;
+  background-color: #6ecaff;
+}
+
+.change-color-icon:active {
   background-color: #6ecaff86;
   position: relative;
   top: 4px;

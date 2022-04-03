@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TodoForm from './TodoForm';
-import Todo from './Todo';
+import Todo, { filterText } from './Todo';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import adulting from './assets/gifs/adulting-demo.gif';
 import { RiInformationLine } from 'react-icons/ri'
@@ -53,15 +53,14 @@ function TodoList() {
         // console.log("setStatusState is: ", stateToggled);
     }
     const addTodo = todo => {
-        // btnType = addTodo.name;
-        // console.log("btnType is: ", btnType);
+        // if empty string, do not add string to list.
         if (!todo.text || /^\s*$/.test(todo.text)) {
             return;
         }
         const newTodos = [todo, ...todos];
         setTodos(newTodos);
-        taskItem = todo.text.replace(/\s+/g, ' ').trim();
-        changeStatus(todo.text, "addTodo");
+        taskItem = filterText(todo.text);
+        changeStatus(filterText(todo.text), "addTodo");
         // console.log(todo, ...todos);
     };
 
@@ -81,15 +80,15 @@ function TodoList() {
     }
 
     const updateTodo = (todoId, newValue, prevValue) => {
-        updatedMsg = prevValue.replace(/\s+/g, ' ').trim();
-        newMsg = newValue.text.replace(/\s+/g, ' ').trim();
-        // btnType = updateTodo.name;
-        // console.log("btnType is: ", btnType);
-        changeStatus(updatedMsg, "updateTodo");
         if (!newValue.text || /^\s*$/.test(newValue.text)) {
             return;
         }
-
+        updatedMsg = filterText(prevValue);
+        newMsg = filterText(newValue.text);
+        if (updatedMsg === newMsg) {
+            return;
+        }
+        changeStatus(updatedMsg, "updateTodo");
         setTodos(prev => prev.map(item => (item.id === todoId ? newValue : item)))
         taskItem = newValue;
     }
@@ -103,12 +102,7 @@ function TodoList() {
         setTodos(updatedTodos);
     }
     const removeTodo = (id, text) => {
-
-        // btnType = removeTodo.name;
-        // console.log("btnType is: ", btnType);
-        // console.log("text is: ", text);
-        taskItem = text.replace(/\s+/g, ' ').trim();
-
+        taskItem = filterText(text);
         changeStatus(text, "removeTodo");
         const removeArr = [...todos].filter(todo => todo.id !== id);
         setTodos(removeArr);
