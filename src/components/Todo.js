@@ -34,7 +34,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
         id: null,
         value: ''
     })
-
+    const componentRef = React.useRef();
     const rowRef = useRef('white');
 
     const getItemStyle = (isDragging, draggableStyle, id) => ({
@@ -43,6 +43,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
         width: "100%",
         padding: "5px",
 
+        //if id matches ref id, change color of element that matches the id
 
         // change background colour if dragging
         background: isDragging ? "lightgreen" : currentColor,
@@ -52,13 +53,13 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
     });
 
     const changeRowColor = (id) => {
-        console.log(id);
-        if (currentColor === 'white') {
-            setCurrentColor('red');
-        }
-        if (currentColor === 'red') {
-            setCurrentColor('white');
-        }
+        console.log(id.current);
+        // if (currentColor === 'white') {
+        //     setCurrentColor('red');
+        // }
+        // if (currentColor === 'red') {
+        //     setCurrentColor('white');
+        // }
     }
 
 
@@ -82,7 +83,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
     return (
         todos.map((todo, index) =>
 
-            <div ref={rowRef} key={todo.id} className={todo.isComplete ? 'todo-row complete' : 'todo-row'} >
+            <div key={todo.id} className={todo.isComplete ? 'todo-row complete' : 'todo-row'} >
                 <Draggable key={todo.id} draggableId={todo.id} index={index}>
                     {(provided, snapshot) => (
                         <div className="list-item" ref={provided.innerRef}
@@ -91,13 +92,12 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
                             style={getItemStyle(
                                 snapshot.isDragging,
                                 provided.draggableProps.style,
-                                todo.id
                             )}>
 
                             <div className="todo-text" key={todo.id} onClick={() => completeTodo(todo.id, completeTxt = filterText(todo.text))}>
                                 {todo.text}
                             </div>
-                            <div className="icons">
+                            <div ref={componentRef.current} className="icons">
                                 <div className='delete-icon'>
                                     <RiDeleteBinLine size={28} onClick={() => removeTodo(todo.id, removeItem = filterText(todo.text))}
 
@@ -111,7 +111,10 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
                                     }} />
                                 </div>
                                 <div className="change-color-icon">
-                                    <HiOutlineColorSwatch size={28} onClick={() => changeRowColor(todo.id)} />
+                                    <HiOutlineColorSwatch size={28} onClick={() => {
+                                        changeRowColor(rowRef);
+                                        console.log(todo.id)
+                                    }} />
                                 </div>
                             </div>
                         </div>

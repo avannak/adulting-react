@@ -12,7 +12,7 @@ function TodoForm(props) {
         if (input === '') {
             setCounterState(false);
         }
-    })
+    }, [input])
 
     const handleChange = (e) => {
         setCounterState(true);
