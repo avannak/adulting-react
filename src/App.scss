@@ -11,6 +11,9 @@ $main-color: #e4594f;
   font-weight: bolder;
   text-shadow: 2px 2px 2px rgb(0, 0, 0);
 }
+html{
+  font-size: .9em;
+}
 body {
   font-family: "Inconsolata", monospace;
   font-size: 1.5em;
@@ -88,7 +91,7 @@ padding: 0;
   -ms-user-select: none;
   font-family: "Inconsolata", monospace;
   font-size: 1rem;
-  font-weight: bolder;
+  font-weight: bold;
   padding: 15px;
   box-shadow: 3px 3px 3px black;
   box-sizing: border-box;

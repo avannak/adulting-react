@@ -9,9 +9,11 @@
   font-weight: bolder;
   text-shadow: 2px 2px 2px black;
 }
-html{
+
+html {
   font-size: .9em;
 }
+
 body {
   font-family: "Inconsolata", monospace;
   font-size: 1.5em;
@@ -86,16 +88,15 @@ body {
   cursor: pointer;
   background: transparent;
   border-radius: 50%;
-  margin-right: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: left;
       -ms-flex-pack: left;
-          justify-content: right;
+          justify-content: left;
   padding: 0;
-  /* margin-bottom: 10px;
-  margin-right: 5px; */
+  margin-bottom: 10px;
+  margin-right: 5px;
   height: 20px;
   width: 20px;
 }
@@ -125,10 +126,8 @@ body {
   -ms-user-select: none;
   font-family: "Inconsolata", monospace;
   font-size: 1rem;
-  font-weight: bolder;
+  font-weight: bold;
   padding: 15px;
-  padding-left: 10px;
-  padding-right: 10px;
   -webkit-box-shadow: 3px 3px 3px black;
           box-shadow: 3px 3px 3px black;
   box-sizing: border-box;
@@ -170,7 +169,6 @@ body {
 }
 
 .todo-form {
-  width: auto;
   padding: 0;
 }
 
@@ -186,7 +184,7 @@ body {
           box-shadow: 3px 3px 3px black;
   border: 2px solid #0c92ff;
   outline: none;
-  width: 39vw;
+  width: 60%;
   background: transparent;
   color: #fff;
   -webkit-transition: 0.2s;
