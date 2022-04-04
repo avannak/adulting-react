@@ -35,7 +35,7 @@ function TodoList() {
         localStorage.setItem("todos", JSON.stringify(todos));
         // add the todos as a dependancy because we want to update the
         // localstorage anytime the todos state changes
-    }, [todos]);
+    }, [stateToggled, dragNotifToggled, todos]);
 
 
     const changeStatus = (message, buttonType) => {

@@ -34,8 +34,8 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
         id: null,
         value: ''
     })
-    const componentRef = React.useRef();
-    const rowRef = useRef('white');
+    // const componentRef = React.useRef();
+    const rowRef = React.useRef(null);
 
     const getItemStyle = (isDragging, draggableStyle, id) => ({
         // basic styles to make the items look a bit nicer
@@ -52,8 +52,12 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
         ...draggableStyle
     });
 
-    const changeRowColor = (id) => {
-        console.log(id.current);
+    const changeRowColor = (color) => {
+        console.log(rowRef);
+        // if (color === 'white') {
+        //     setCurrentColor('white');
+        // }
+        // console.log(id);
         // if (currentColor === 'white') {
         //     setCurrentColor('red');
         // }
@@ -94,10 +98,10 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
                                 provided.draggableProps.style,
                             )}>
 
-                            <div className="todo-text" key={todo.id} onClick={() => completeTodo(todo.id, completeTxt = filterText(todo.text))}>
+                            <div ref={rowRef} className="todo-text" key={todo.id} onClick={() => completeTodo(todo.id, completeTxt = filterText(todo.text))}>
                                 {todo.text}
                             </div>
-                            <div ref={componentRef.current} className="icons">
+                            <div className="icons">
                                 <div className='delete-icon'>
                                     <RiDeleteBinLine size={28} onClick={() => removeTodo(todo.id, removeItem = filterText(todo.text))}
 
@@ -112,7 +116,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
                                 </div>
                                 <div className="change-color-icon">
                                     <HiOutlineColorSwatch size={28} onClick={() => {
-                                        changeRowColor(rowRef);
+                                        console.log(index);
                                         console.log(todo.id)
                                     }} />
                                 </div>
