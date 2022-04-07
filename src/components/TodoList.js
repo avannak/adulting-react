@@ -12,7 +12,15 @@ let newMsg;
 
 function TodoList() {
 
-    const [stateToggled, setStatusState] = useState(false);
+    const [stateToggled, setStatusState] = useState(() => {
+        const savedToggleState = localStorage.getItem("stateToggled");
+
+        if (savedToggleState) {
+            return JSON.parse(savedToggleState);
+        } else {
+            return false;
+        }
+    });
     const [dragNotifToggled, setDragNotifState] = useState(false);
     const [todos, setTodos] = useState(() => {
         // get the todos from localstorage
@@ -28,6 +36,8 @@ function TodoList() {
         }
     });
     useEffect(() => {
+        setDragNotifState(false);
+        setStatusState(false);
         // localstorage only support storing strings as keys and values
         // - therefore we cannot store arrays and objects without converting the object
         // into a string first. JSON.stringify will convert the object into a JSON string
@@ -35,12 +45,13 @@ function TodoList() {
         localStorage.setItem("todos", JSON.stringify(todos));
         // add the todos as a dependancy because we want to update the
         // localstorage anytime the todos state changes
-    }, [stateToggled, dragNotifToggled, todos]);
+    }, [todos]);
 
 
     const changeStatus = (message, buttonType) => {
         const setStateToFalse = () => {
             setStatusState(false);
+            localStorage.setItem("stateToggled", false);
         }
         taskItem = message;
         btnType = buttonType;
@@ -107,7 +118,10 @@ function TodoList() {
     const getDraggableNotif = () => {
         setDragNotifState(true);
         if (!dragNotifToggled) {
-            setTimeout(function () { setDragNotifState(false); }, 6000);
+            setTimeout(function () {
+                setDragNotifState(false);
+                localStorage.setItem("setDragNotifState", false);
+            }, 6000);
         }
     }
     // "list-status active"

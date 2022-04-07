@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import TodoForm from './TodoForm'
 import { RiDeleteBinLine } from 'react-icons/ri'
 import { FaRegEdit } from "react-icons/fa";
@@ -27,7 +27,24 @@ export const filterText = (text) => {
 }
 
 function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
-    let [trigger, setTrigger] = useState(false);
+    const [trigger, setTrigger] = useState(false);
+
+    // const [rowColors, setRowColors] = useState(() => {
+    //     // get the todos from localstorage
+    //     const savedColors = localStorage.getItem("backgroundColor");
+    //     // if there are todos stored
+    //     if (savedColors) {
+    //         // return the parsed the JSON object back to a javascript object
+    //         return JSON.parse(rowColors);
+    //         // otherwise
+    //     } else {
+    //         // return an empty array
+    //         return [];
+    //     }
+    // });
+    useEffect(() => {
+        setTrigger(false);
+    }, []);
     // let [currentColor, setCurrentColor] = useState(null);
 
     // const [bg, changeBGColor] = React.useState(1);
@@ -48,7 +65,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
         //if not dragging, set color to what document element by id is currently
 
         // change background colour if dragging
-        backgroundColor: trigger === false ? setColorTo(rowId, trigger) : setColorTo(rowId, trigger),
+        backgroundColor: !trigger ? setColorTo(rowId, trigger) : setColorTo(rowId, trigger),
         // background: isDragging ? "lightgreen" : setColorTo(rowId, trigger),
         boxShadow: isDragging ? "2px 2px 10px black" : "none",
         // styles we need to apply on draggables 
@@ -59,7 +76,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
             setTrigger(true);
             return 'white';
         } else if (triggerFinger === true) {
-
+            // localStorage.setItem(rowId, document.getElementById(rowId).style.backgroundColor)
             return document.getElementById(rowId).style.backgroundColor;
         } else {
             return 'white';
@@ -73,27 +90,35 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
         // console.log(currentColor);
         // console.log(element.backgroundColor);
         if (element.style.backgroundColor === 'white') {
+            // localStorage.setItem("backgroundColor", "lightcoral");
             return (document.getElementById(rowId).style.backgroundColor = "lightcoral");
         }
         if (element.style.backgroundColor === 'lightcoral') {
+            // localStorage.setItem("backgroundColor", 'rgb(252, 196, 92)');
             return document.getElementById(rowId).style.backgroundColor = "rgb(252, 196, 92)";
         }
         if (element.style.backgroundColor === 'rgb(252, 196, 92)') {
+            // localStorage.setItem("backgroundColor", 'rgb(255, 243, 132)');
             return document.getElementById(rowId).style.backgroundColor = "rgb(255, 243, 132)";
         }
         if (element.style.backgroundColor === 'rgb(255, 243, 132)') {
+            // localStorage.setItem("backgroundColor", 'lightgreen');
             return document.getElementById(rowId).style.backgroundColor = "lightgreen";
         }
         if (element.style.backgroundColor === 'lightgreen') {
+            // localStorage.setItem("backgroundColor", 'lightblue');
             return document.getElementById(rowId).style.backgroundColor = "lightblue";
         }
         if (element.style.backgroundColor === 'lightblue') {
+            // localStorage.setItem("backgroundColor", 'rgb(192, 103, 255)');
             return document.getElementById(rowId).style.backgroundColor = "rgb(192, 103, 255)";
         }
         if (element.style.backgroundColor === 'rgb(192, 103, 255)') {
+            // localStorage.setItem("backgroundColor", 'rgb(255, 173, 255)');
             return document.getElementById(rowId).style.backgroundColor = "rgb(255, 173, 255)";
         }
         if (element.style.backgroundColor === 'rgb(255, 173, 255)') {
+            // localStorage.setItem("backgroundColor", 'white');
             return document.getElementById(rowId).style.backgroundColor = "white";
         }
 
@@ -103,7 +128,6 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
 
         let prevValue = updateItem;
         updateTodo(edit.id, value, prevValue)
-        // console.log("AMAMAMAM:", prevValue);
         setEdit({
             id: null,
             value: ''
