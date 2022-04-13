@@ -42,9 +42,9 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
     //         return [];
     //     }
     // });
-    useEffect(() => {
-        setTrigger(false);
-    }, []);
+    // useEffect(() => {
+    //     setTrigger(false);
+    // }, []);
     // let [currentColor, setCurrentColor] = useState(null);
 
     // const [bg, changeBGColor] = React.useState(1);
@@ -65,7 +65,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
         //if not dragging, set color to what document element by id is currently
 
         // change background colour if dragging
-        backgroundColor: !trigger ? setColorTo(rowId, trigger) : setColorTo(rowId, trigger),
+        backgroundColor: !trigger ? setColorTo(rowId, trigger) : setColorTo(rowId),
         // background: isDragging ? "lightgreen" : setColorTo(rowId, trigger),
         boxShadow: isDragging ? "2px 2px 10px black" : "none",
         // styles we need to apply on draggables 
