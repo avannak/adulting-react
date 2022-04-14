@@ -5,9 +5,9 @@ import { FaRegEdit } from "react-icons/fa";
 import { HiOutlineColorSwatch } from "react-icons/hi";
 import { Draggable } from 'react-beautiful-dnd';
 
-export let removeItem;
-export let completeTxt;
-export let updateItem;
+export let removeItem = '';
+export let completeTxt = '';
+export let updateItem = '';
 // let currentClr = 'red';
 // function to help us with reordering the result
 export const reorder = (list, startIndex, endIndex) => {
@@ -18,36 +18,12 @@ export const reorder = (list, startIndex, endIndex) => {
     return result;
 };
 
-export const ThemeContext = React.createContext()
-
-
 export const filterText = (text) => {
     let filteredTxt = text.replace(/\s+/g, ' ').trim();
     return filteredTxt.trimEnd();
 }
 
 function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
-    const [trigger, setTrigger] = useState(false);
-
-    // const [rowColors, setRowColors] = useState(() => {
-    //     // get the todos from localstorage
-    //     const savedColors = localStorage.getItem("backgroundColor");
-    //     // if there are todos stored
-    //     if (savedColors) {
-    //         // return the parsed the JSON object back to a javascript object
-    //         return JSON.parse(rowColors);
-    //         // otherwise
-    //     } else {
-    //         // return an empty array
-    //         return [];
-    //     }
-    // });
-    // useEffect(() => {
-    //     setTrigger(false);
-    // }, []);
-    // let [currentColor, setCurrentColor] = useState(null);
-
-    // const [bg, changeBGColor] = React.useState(1);
 
     const [edit, setEdit] = useState({
         id: null,
@@ -65,17 +41,21 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
         //if not dragging, set color to what document element by id is currently
 
         // change background colour if dragging
-        backgroundColor: !trigger ? setColorTo(rowId, trigger) : setColorTo(rowId),
+        backgroundColor: getColor(rowId),
         // background: isDragging ? "lightgreen" : setColorTo(rowId, trigger),
         boxShadow: isDragging ? "2px 2px 10px black" : "none",
         // styles we need to apply on draggables 
         ...draggableStyle
     });
-    const setColorTo = (rowId, triggerFinger) => {
-        if (triggerFinger === false) {
-            setTrigger(true);
+
+    const getColor = (rowId) => {
+
+    }
+
+    const setColorTo = (rowId, starting) => {
+        if (starting === false) {
             return 'white';
-        } else if (triggerFinger === true) {
+        } else if (starting === true) {
             // localStorage.setItem(rowId, document.getElementById(rowId).style.backgroundColor)
             return document.getElementById(rowId).style.backgroundColor;
         } else {
@@ -86,9 +66,6 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
     const changeColor = (rowId, provided) => {
 
         let element = document.getElementById(rowId);
-        // console.log(provided);
-        // console.log(currentColor);
-        // console.log(element.backgroundColor);
         if (element.style.backgroundColor === 'white') {
             // localStorage.setItem("backgroundColor", "lightcoral");
             return (document.getElementById(rowId).style.backgroundColor = "lightcoral");
@@ -168,14 +145,15 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
                                 </div>
                                 <div className="edit-icon">
                                     <FaRegEdit size={28} onClick={() => {
-                                        setTrigger(false);
                                         setEdit({ id: todo.id, value: filterText(todo.text) });
                                         updateItem = filterText(todo.text);
 
                                     }} />
                                 </div>
                                 <div className="change-color-icon">
-                                    <HiOutlineColorSwatch size={28} onClick={() => { changeColor(todo.id, provided) }} />
+                                    <HiOutlineColorSwatch size={28} onClick={() => {
+                                        changeColor(todo.id, provided);
+                                    }} />
                                 </div>
                             </div>
                         </div>

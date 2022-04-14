@@ -5,22 +5,14 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import adulting from './assets/gifs/adulting-demo.gif';
 import { RiInformationLine } from 'react-icons/ri'
 
-let taskItem;
-let btnType;
-let updatedMsg;
-let newMsg;
+let taskItem = '';
+let btnType = '';
+let updatedMsg = '';
+let newMsg = '';
 
 function TodoList() {
 
-    const [stateToggled, setStatusState] = useState(() => {
-        const savedToggleState = localStorage.getItem("stateToggled");
-
-        if (savedToggleState) {
-            return JSON.parse(savedToggleState);
-        } else {
-            return false;
-        }
-    });
+    const [stateToggled, setStatusState] = useState(false);
     const [dragNotifToggled, setDragNotifState] = useState(false);
     const [todos, setTodos] = useState(() => {
         // get the todos from localstorage
@@ -35,23 +27,34 @@ function TodoList() {
             return [];
         }
     });
+    const [colors, setColors] = useState(() => {
+        // get the todos from localstorage
+        const savedColors = localStorage.getItem("colors");
+        // if there are todos stored
+        if (savedColors) {
+            // return the parsed the JSON object back to a javascript object
+            return JSON.parse(savedColors);
+            // otherwise
+        } else {
+            // return an empty array
+            return [];
+        }
+    })
     useEffect(() => {
-        setDragNotifState(false);
-        setStatusState(false);
         // localstorage only support storing strings as keys and values
         // - therefore we cannot store arrays and objects without converting the object
         // into a string first. JSON.stringify will convert the object into a JSON string
         // reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
         localStorage.setItem("todos", JSON.stringify(todos));
+        localStorage.setItem("colors", JSON.stringify(colors));
         // add the todos as a dependancy because we want to update the
         // localstorage anytime the todos state changes
-    }, [todos]);
+    }, [todos, colors]);
 
 
     const changeStatus = (message, buttonType) => {
         const setStateToFalse = () => {
             setStatusState(false);
-            localStorage.setItem("stateToggled", false);
         }
         taskItem = message;
         btnType = buttonType;
