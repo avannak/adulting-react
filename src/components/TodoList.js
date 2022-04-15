@@ -20,8 +20,8 @@ function TodoList() {
         localStorage.setItem("todos", JSON.stringify(data));
     };
 
-    const [stateToggled, setStatusState] = useState(false);
-    const [dragNotifToggled, setDragNotifState] = useState(false);
+    const [stateToggled, setStatusState] = useState(() => false);
+    const [dragNotifToggled, setDragNotifState] = useState(() => false);
     const [todos, setTodos] = useState(() => {
         // get the todos from localstorage
         const savedTodos = localStorage.getItem("todos");
@@ -64,15 +64,14 @@ function TodoList() {
     const addTodo = todo => {
         // if empty string, do not add string to list.
         if (!todo.text || /^\s*$/.test(todo.text)) {
-            updateStorage(data);
             return;
         }
-        updateStorage(data);
+
         const newTodos = [todo, ...todos];
         setTodos(newTodos);
         taskItem = filterText(todo.text);
         changeStatus(filterText(todo.text), "addTodo");
-        updateStorage(data);
+
         // console.log(todo, ...todos);
     };
 

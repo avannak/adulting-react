@@ -4,7 +4,7 @@ import { v4 } from "uuid";
 function TodoForm(props) {
 
     const [input, setInput] = useState(props.edit ? props.edit.value : '');
-    const [counterStateToggled, setCounterState] = useState(false);
+    const [counterStateToggled, setCounterState] = useState(() => false);
 
     const inputRef = useRef(null)
 

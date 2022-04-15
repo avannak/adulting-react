@@ -5,9 +5,9 @@ import { FaRegEdit } from "react-icons/fa";
 import { HiOutlineColorSwatch } from "react-icons/hi";
 import { Draggable } from 'react-beautiful-dnd';
 
-export let removeItem = '';
-export let completeTxt = '';
-export let updateItem = '';
+let removeItem = '';
+let completeTxt = '';
+let updateItem = '';
 
 // let currentClr = 'red';
 // function to help us with reordering the result
