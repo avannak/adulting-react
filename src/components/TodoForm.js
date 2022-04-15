@@ -21,14 +21,15 @@ function TodoForm(props) {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
+        const data = JSON.parse(localStorage.getItem('todos'));
+        console.log("grabbing data after handling submit: ", data);
+        localStorage.setItem('todos', JSON.stringify(data));
         props.onSubmit({
             id: v4(),
             text: input,
-            colors: 'white',
+            colors: "white",
+            // colors: colorExists ? "white": "white",
         });
-        const data = JSON.parse(localStorage.getItem('todos'));
-        localStorage.setItem('todos', JSON.stringify(data));
-        console.log("dattta", data)
         // const data = JSON.parse(localStorage.getItem('todos'));
         setCounterState(false);
         setInput('');
@@ -36,7 +37,7 @@ function TodoForm(props) {
     return (
         <form className="todo-form" onSubmit={handleSubmit}>
             {props.edit ? (
-                <React.Fragment>
+                <div>
                     <input
                         type="text"
                         value={input}
@@ -48,9 +49,9 @@ function TodoForm(props) {
                         maxLength={100}
                     />
                     <button className="todo-button edit">Update</button>
-                </React.Fragment>) :
+                </div>) :
                 (
-                    <React.Fragment>
+                    <div>
                         <input
                             type="text"
                             value={input}
@@ -62,7 +63,7 @@ function TodoForm(props) {
                             maxLength={100}
                         />
                         <button className="todo-button">Add Task</button>
-                    </React.Fragment>)
+                    </div>)
             }
             <div style={{ color: "white" }} className={counterStateToggled ? "word-counter active" : "word-counter inactive"}>{100 - input.length} characters left</div>
         </form>

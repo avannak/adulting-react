@@ -11,7 +11,15 @@ let updatedMsg = '';
 let newMsg = '';
 
 function TodoList() {
-    const data = JSON.parse(localStorage.getItem('todos'));
+    let data = JSON.parse(localStorage.getItem('todos'));
+    const updateStorage = (updatedData) => {
+        data = {
+            ...JSON.parse(localStorage.getItem('todos')),
+            ...updatedData
+        }
+        localStorage.setItem("todos", JSON.stringify(data));
+    };
+
     const [stateToggled, setStatusState] = useState(false);
     const [dragNotifToggled, setDragNotifState] = useState(false);
     const [todos, setTodos] = useState(() => {
@@ -56,13 +64,15 @@ function TodoList() {
     const addTodo = todo => {
         // if empty string, do not add string to list.
         if (!todo.text || /^\s*$/.test(todo.text)) {
+            updateStorage(data);
             return;
         }
+        updateStorage(data);
         const newTodos = [todo, ...todos];
         setTodos(newTodos);
         taskItem = filterText(todo.text);
         changeStatus(filterText(todo.text), "addTodo");
-        localStorage.setItem('todos', JSON.stringify(data));
+        updateStorage(data);
         // console.log(todo, ...todos);
     };
 
@@ -82,6 +92,7 @@ function TodoList() {
     }
 
     const updateTodo = (todoId, newValue, prevValue) => {
+        updateStorage(todos);
         updatedMsg = filterText(prevValue);
         newMsg = filterText(newValue.text);
         if (!newValue.text || /^\s*$/.test(newValue.text) || updatedMsg === newMsg) {
@@ -92,7 +103,6 @@ function TodoList() {
         taskItem = newValue;
     }
     const completeTodo = (id, text) => {
-        const data = JSON.parse(localStorage.getItem('todos'));
         let updatedTodos = todos.map(todo => {
             if (todo.id === id) {
                 todo.isComplete = !todo.isComplete;
@@ -100,7 +110,6 @@ function TodoList() {
             return todo;
         });
         setTodos(updatedTodos);
-        localStorage.setItem("todos", JSON.stringify(data));
     }
     const removeTodo = (id, text) => {
         taskItem = filterText(text);

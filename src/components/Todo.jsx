@@ -217,7 +217,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
         updateTodo(edit.id, value, prevValue)
         setEdit({
             id: null,
-            value: ''
+            value: '',
         })
 
     }
@@ -225,7 +225,59 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
 
     if (edit.id) {
 
-        return <TodoForm edit={edit} onSubmit={submitUpdate} />;
+        return (
+
+            <div>
+                <TodoForm edit={edit} onSubmit={submitUpdate} />
+                {todos.map((todo, index) =>
+                    <div ref={rowRef} key={index} className={todo.isComplete ? 'todo-row complete' : 'todo-row'} >
+                        <Draggable key={todo.id} draggableId={todo.id} index={index} >
+                            {(provided, snapshot) => (
+                                <div id={todo.id} className="list-item" ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                    style={
+                                        getItemStyle(
+                                            snapshot.isDragging,
+                                            provided.draggableProps.style,
+                                            todo.id
+                                        )}>
+
+                                    <div className="todo-text" key={todo.id} onClick={() => completeTodo(todo.id, completeTxt = filterText(todo.text))}>
+                                        {todo.text}
+                                    </div>
+                                    <div className="icons">
+                                        <div className='delete-icon'>
+                                            <RiDeleteBinLine size={28} onClick={() => {
+                                                removeTodo(todo.id, removeItem = filterText(todo.text))
+                                            }}
+
+                                            />
+                                        </div>
+                                        <div className="edit-icon">
+                                            <FaRegEdit size={28} onClick={() => {
+                                                setEdit({ id: todo.id, value: filterText(todo.text) });
+                                                updateItem = filterText(todo.text);
+
+                                            }} />
+                                        </div>
+                                        <div className="change-color-icon">
+                                            <HiOutlineColorSwatch size={28} onClick={() => {
+                                                const data = JSON.parse(localStorage.getItem('todos'));
+                                                localStorage.setItem('todos', JSON.stringify(data));
+                                                changeColor(todo.id, data);
+
+                                                console.log("data is: ", data);
+                                            }} />
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </Draggable >
+                    </div >
+                )}
+            </div>
+        );
     }
 
 
@@ -251,8 +303,6 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
                             <div className="icons">
                                 <div className='delete-icon'>
                                     <RiDeleteBinLine size={28} onClick={() => {
-                                        const data = JSON.parse(localStorage.getItem('todos'));
-                                        localStorage.setItem('todos', JSON.stringify(data));
                                         removeTodo(todo.id, removeItem = filterText(todo.text))
                                     }}
 
@@ -264,7 +314,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
                                         localStorage.setItem('todos', JSON.stringify(data));
                                         setEdit({ id: todo.id, value: filterText(todo.text) });
                                         updateItem = filterText(todo.text);
-
+                                        console.log("data after pressing edit is: ", data);
                                     }} />
                                 </div>
                                 <div className="change-color-icon">
@@ -273,7 +323,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
                                         localStorage.setItem('todos', JSON.stringify(data));
                                         changeColor(todo.id, data);
 
-                                        console.log("data is: ", data);
+                                        console.log("data after pressing change color: ", data);
                                     }} />
                                 </div>
                             </div>
