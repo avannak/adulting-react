@@ -23,6 +23,7 @@ function TodoForm(props) {
         props.onSubmit({
             id: v4(),
             text: input,
+            colors: 'white',
         });
         setCounterState(false);
         setInput('');

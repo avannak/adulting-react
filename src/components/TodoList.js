@@ -27,29 +27,16 @@ function TodoList() {
             return [];
         }
     });
-    const [colors, setColors] = useState(() => {
-        // get the todos from localstorage
-        const savedColors = localStorage.getItem("colors");
-        // if there are todos stored
-        if (savedColors) {
-            // return the parsed the JSON object back to a javascript object
-            return JSON.parse(savedColors);
-            // otherwise
-        } else {
-            // return an empty array
-            return [];
-        }
-    })
     useEffect(() => {
         // localstorage only support storing strings as keys and values
         // - therefore we cannot store arrays and objects without converting the object
         // into a string first. JSON.stringify will convert the object into a JSON string
         // reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
         localStorage.setItem("todos", JSON.stringify(todos));
-        localStorage.setItem("colors", JSON.stringify(colors));
+
         // add the todos as a dependancy because we want to update the
         // localstorage anytime the todos state changes
-    }, [todos, colors]);
+    }, [todos]);
 
 
     const changeStatus = (message, buttonType) => {
@@ -60,11 +47,11 @@ function TodoList() {
         btnType = buttonType;
         // getStatusMsg(message, buttonType);
         setStatusState(true);
-        // console.log("setStatusState is: ", stateToggled);
+        // // console.log("setStatusState is: ", stateToggled);
         if (!stateToggled) {
             setTimeout(function () { setStateToFalse(); }, 5000);
         }
-        // console.log("setStatusState is: ", stateToggled);
+        // // console.log("setStatusState is: ", stateToggled);
     }
     const addTodo = todo => {
         // if empty string, do not add string to list.
@@ -75,7 +62,7 @@ function TodoList() {
         setTodos(newTodos);
         taskItem = filterText(todo.text);
         changeStatus(filterText(todo.text), "addTodo");
-        // console.log(todo, ...todos);
+        // // console.log(todo, ...todos);
     };
 
     const getStatusMsg = (message, buttonType) => {
@@ -111,6 +98,8 @@ function TodoList() {
             return todo;
         });
         setTodos(updatedTodos);
+        let data = JSON.parse(localStorage.getItem('todos'));
+        localStorage.setItem("todos", JSON.stringify(data));
     }
     const removeTodo = (id, text) => {
         taskItem = filterText(text);
@@ -144,9 +133,13 @@ function TodoList() {
             <DragDropContext onDragEnd={(param) => {
                 const srcI = param.source.index;
                 const desI = param.destination.index;
+                let data = JSON.parse(localStorage.getItem('todos'));
                 todos.splice(desI, 0, todos.splice(srcI, 1)[0]);
-                localStorage.setItem("todos", JSON.stringify(todos));
-                // console.log(param);
+                data.splice(desI, 0, data.splice(srcI, 1)[0]);
+                localStorage.setItem("todos", JSON.stringify(data));
+
+
+                // // console.log(param);
             }}>
                 <Droppable droppableId="droppable-1">
                     {(provided, snapshot) => (
