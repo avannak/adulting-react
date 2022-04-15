@@ -11,7 +11,7 @@ let updatedMsg = '';
 let newMsg = '';
 
 function TodoList() {
-
+    const data = JSON.parse(localStorage.getItem('todos'));
     const [stateToggled, setStatusState] = useState(false);
     const [dragNotifToggled, setDragNotifState] = useState(false);
     const [todos, setTodos] = useState(() => {
@@ -47,11 +47,11 @@ function TodoList() {
         btnType = buttonType;
         // getStatusMsg(message, buttonType);
         setStatusState(true);
-        // // console.log("setStatusState is: ", stateToggled);
+        // console.log("setStatusState is: ", stateToggled);
         if (!stateToggled) {
             setTimeout(function () { setStateToFalse(); }, 5000);
         }
-        // // console.log("setStatusState is: ", stateToggled);
+        // console.log("setStatusState is: ", stateToggled);
     }
     const addTodo = todo => {
         // if empty string, do not add string to list.
@@ -62,7 +62,7 @@ function TodoList() {
         setTodos(newTodos);
         taskItem = filterText(todo.text);
         changeStatus(filterText(todo.text), "addTodo");
-        // // console.log(todo, ...todos);
+        // console.log(todo, ...todos);
     };
 
     const getStatusMsg = (message, buttonType) => {
@@ -98,7 +98,6 @@ function TodoList() {
             return todo;
         });
         setTodos(updatedTodos);
-        let data = JSON.parse(localStorage.getItem('todos'));
         localStorage.setItem("todos", JSON.stringify(data));
     }
     const removeTodo = (id, text) => {
@@ -138,8 +137,7 @@ function TodoList() {
                 data.splice(desI, 0, data.splice(srcI, 1)[0]);
                 localStorage.setItem("todos", JSON.stringify(data));
 
-
-                // // console.log(param);
+                // console.log(param);
             }}>
                 <Droppable droppableId="droppable-1">
                     {(provided, snapshot) => (

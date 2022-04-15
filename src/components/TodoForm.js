@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { v4 } from "uuid";
 
+
+
 function TodoForm(props) {
+    const data = JSON.parse(localStorage.getItem('todos'));
     const [input, setInput] = useState(props.edit ? props.edit.value : '');
     const [counterStateToggled, setCounterState] = useState(false);
 

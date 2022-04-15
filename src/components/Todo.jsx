@@ -8,6 +8,7 @@ import { Draggable } from 'react-beautiful-dnd';
 export let removeItem = '';
 export let completeTxt = '';
 export let updateItem = '';
+
 // let currentClr = 'red';
 // function to help us with reordering the result
 export const reorder = (list, startIndex, endIndex) => {
@@ -24,8 +25,7 @@ export const filterText = (text) => {
 }
 
 function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
-    let data = JSON.parse(localStorage.getItem('todos'));
-
+    const data = JSON.parse(localStorage.getItem('todos'));
     const [edit, setEdit] = useState({
         id: null,
         value: ''
@@ -52,7 +52,6 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
     const getColor = (rowId) => {
         for (const [key, value] of Object.keys(data)) {
             if (data[key].id === rowId) {
-                localStorage.setItem('todos', JSON.stringify(data));
                 return data[key].colors;
             }
         }
@@ -70,7 +69,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
         }
     }
 
-    const changeColor = (rowId, provided) => {
+    const changeColor = (rowId, locData) => {
         const getIdFromStrge = (locData) => {
             for (const [key, value] of Object.keys(locData)) {
                 if (locData[key].id === rowId) {
@@ -165,50 +164,45 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
                 }
             }
         }
-        // // console.log("row is: ", data);
-        // // console.log("rowid is: ", data[0]);
-        let todoList = JSON.parse(localStorage.getItem('todos'));
-        // // console.log("todolist is: ", todoList);
-
         let element = document.getElementById(rowId);
-        if (rowId === getIdFromStrge(data) && getColorsFromStrge(data) === 'white') {
-            updateColorStrge(data, 'white');
+        if (rowId === getIdFromStrge(locData) && getColorsFromStrge(locData) === 'white') {
+            updateColorStrge(locData, 'white');
             // localStorage.setItem("backgroundColor", "lightcoral");
             return (document.getElementById(rowId).style.backgroundColor = "lightcoral");
         }
-        if (rowId === getIdFromStrge(data) && getColorsFromStrge(data) === 'lightcoral') {
+        if (rowId === getIdFromStrge(locData) && getColorsFromStrge(locData) === 'lightcoral') {
             // localStorage.setItem("backgroundColor", 'rgb(252, 196, 92)');
-            updateColorStrge(data, 'lightcoral');
+            updateColorStrge(locData, 'lightcoral');
             return document.getElementById(rowId).style.backgroundColor = "rgb(252, 196, 92)";
         }
-        if (rowId === getIdFromStrge(data) && getColorsFromStrge(data) === 'rgb(252, 196, 92)') {
+        if (rowId === getIdFromStrge(locData) && getColorsFromStrge(locData) === 'rgb(252, 196, 92)') {
             // localStorage.setItem("backgroundColor", 'rgb(255, 243, 132)');
-            updateColorStrge(data, 'rgb(252, 196, 92)');
+            updateColorStrge(locData, 'rgb(252, 196, 92)');
             return document.getElementById(rowId).style.backgroundColor = "rgb(255, 243, 132)";
         }
-        if (rowId === getIdFromStrge(data) && getColorsFromStrge(data) === 'rgb(255, 243, 132)') {
+        if (rowId === getIdFromStrge(locData) && getColorsFromStrge(locData) === 'rgb(255, 243, 132)') {
             // localStorage.setItem("backgroundColor", 'lightgreen');
-            updateColorStrge(data, 'rgb(255, 243, 132)');
+            updateColorStrge(locData, 'rgb(255, 243, 132)');
             return document.getElementById(rowId).style.backgroundColor = "lightgreen";
         }
-        if (rowId === getIdFromStrge(data) && getColorsFromStrge(data) === 'lightgreen') {
+        if (rowId === getIdFromStrge(locData) && getColorsFromStrge(locData) === 'lightgreen') {
             // localStorage.setItem("backgroundColor", 'lightblue');
-            updateColorStrge(data, 'lightgreen');
+            updateColorStrge(locData, 'lightgreen');
             return document.getElementById(rowId).style.backgroundColor = "lightblue";
         }
-        if (rowId === getIdFromStrge(data) && getColorsFromStrge(data) === 'lightblue') {
+        if (rowId === getIdFromStrge(locData) && getColorsFromStrge(locData) === 'lightblue') {
             // localStorage.setItem("backgroundColor", 'rgb(192, 103, 255)');
-            updateColorStrge(data, 'lightblue');
+            updateColorStrge(locData, 'lightblue');
             return document.getElementById(rowId).style.backgroundColor = "rgb(192, 103, 255)";
         }
-        if (rowId === getIdFromStrge(data) && getColorsFromStrge(data) === 'rgb(192, 103, 255)') {
+        if (rowId === getIdFromStrge(locData) && getColorsFromStrge(locData) === 'rgb(192, 103, 255)') {
             // localStorage.setItem("backgroundColor", 'rgb(255, 173, 255)');
-            updateColorStrge(data, 'rgb(192, 103, 255)');
+            updateColorStrge(locData, 'rgb(192, 103, 255)');
             return document.getElementById(rowId).style.backgroundColor = "rgb(255, 173, 255)";
         }
-        if (rowId === getIdFromStrge(data) && getColorsFromStrge(data) === 'rgb(255, 173, 255)') {
+        if (rowId === getIdFromStrge(locData) && getColorsFromStrge(locData) === 'rgb(255, 173, 255)') {
             // localStorage.setItem("backgroundColor", 'white');
-            updateColorStrge(data, 'rgb(255, 173, 255)');
+            updateColorStrge(locData, 'rgb(255, 173, 255)');
             return document.getElementById(rowId).style.backgroundColor = "white";
         }
 
@@ -222,6 +216,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
             id: null,
             value: ''
         })
+        localStorage.setItem('todos', JSON.stringify(data));
     }
 
 
@@ -265,8 +260,8 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
                                 </div>
                                 <div className="change-color-icon">
                                     <HiOutlineColorSwatch size={28} onClick={() => {
-                                        changeColor(todo.id, provided);
-                                        // console.log("data is: ", data);
+                                        changeColor(todo.id, data);
+                                        console.log("data is: ", data);
                                     }} />
                                 </div>
                             </div>
