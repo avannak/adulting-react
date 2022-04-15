@@ -62,6 +62,7 @@ function TodoList() {
         setTodos(newTodos);
         taskItem = filterText(todo.text);
         changeStatus(filterText(todo.text), "addTodo");
+        localStorage.setItem('todos', JSON.stringify(data));
         // console.log(todo, ...todos);
     };
 
@@ -91,6 +92,7 @@ function TodoList() {
         taskItem = newValue;
     }
     const completeTodo = (id, text) => {
+        const data = JSON.parse(localStorage.getItem('todos'));
         let updatedTodos = todos.map(todo => {
             if (todo.id === id) {
                 todo.isComplete = !todo.isComplete;
@@ -132,7 +134,7 @@ function TodoList() {
             <DragDropContext onDragEnd={(param) => {
                 const srcI = param.source.index;
                 const desI = param.destination.index;
-                let data = JSON.parse(localStorage.getItem('todos'));
+                const data = JSON.parse(localStorage.getItem('todos'));
                 todos.splice(desI, 0, todos.splice(srcI, 1)[0]);
                 data.splice(desI, 0, data.splice(srcI, 1)[0]);
                 localStorage.setItem("todos", JSON.stringify(data));

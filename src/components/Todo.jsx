@@ -25,7 +25,6 @@ export const filterText = (text) => {
 }
 
 function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
-    const data = JSON.parse(localStorage.getItem('todos'));
     const [edit, setEdit] = useState({
         id: null,
         value: ''
@@ -50,6 +49,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
     });
 
     const getColor = (rowId) => {
+        const data = JSON.parse(localStorage.getItem('todos'));
         for (const [key, value] of Object.keys(data)) {
             if (data[key].id === rowId) {
                 return data[key].colors;
@@ -59,6 +59,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
     }
 
     const setColorTo = (rowId, starting) => {
+
         if (starting === false) {
             return 'white';
         } else if (starting === true) {
@@ -70,6 +71,8 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
     }
 
     const changeColor = (rowId, locData) => {
+        const data = JSON.parse(localStorage.getItem('todos'));
+
         const getIdFromStrge = (locData) => {
             for (const [key, value] of Object.keys(locData)) {
                 if (locData[key].id === rowId) {
@@ -216,7 +219,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
             id: null,
             value: ''
         })
-        localStorage.setItem('todos', JSON.stringify(data));
+
     }
 
 
@@ -247,12 +250,18 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
                             </div>
                             <div className="icons">
                                 <div className='delete-icon'>
-                                    <RiDeleteBinLine size={28} onClick={() => removeTodo(todo.id, removeItem = filterText(todo.text))}
+                                    <RiDeleteBinLine size={28} onClick={() => {
+                                        const data = JSON.parse(localStorage.getItem('todos'));
+                                        localStorage.setItem('todos', JSON.stringify(data));
+                                        removeTodo(todo.id, removeItem = filterText(todo.text))
+                                    }}
 
                                     />
                                 </div>
                                 <div className="edit-icon">
                                     <FaRegEdit size={28} onClick={() => {
+                                        const data = JSON.parse(localStorage.getItem('todos'));
+                                        localStorage.setItem('todos', JSON.stringify(data));
                                         setEdit({ id: todo.id, value: filterText(todo.text) });
                                         updateItem = filterText(todo.text);
 
@@ -260,7 +269,10 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
                                 </div>
                                 <div className="change-color-icon">
                                     <HiOutlineColorSwatch size={28} onClick={() => {
+                                        const data = JSON.parse(localStorage.getItem('todos'));
+                                        localStorage.setItem('todos', JSON.stringify(data));
                                         changeColor(todo.id, data);
+
                                         console.log("data is: ", data);
                                     }} />
                                 </div>
