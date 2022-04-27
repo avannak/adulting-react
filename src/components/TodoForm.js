@@ -22,7 +22,6 @@ function TodoForm(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = JSON.parse(localStorage.getItem('todos'));
-        console.log("grabbing data after handling submit: ", data);
         localStorage.setItem('todos', JSON.stringify(data));
         props.onSubmit({
             id: v4(),
@@ -30,6 +29,7 @@ function TodoForm(props) {
             colors: "white",
             // colors: colorExists ? "white": "white",
         });
+        console.log("grabbing data after handling submit: ", data);
         // const data = JSON.parse(localStorage.getItem('todos'));
         setCounterState(false);
         setInput('');
