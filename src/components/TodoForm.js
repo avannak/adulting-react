@@ -30,7 +30,6 @@ function TodoForm(props) {
             // colors: colorExists ? "white": "white",
         });
         console.log("grabbing data after handling submit: ", data);
-        // const data = JSON.parse(localStorage.getItem('todos'));
         setCounterState(false);
         setInput('');
     };
