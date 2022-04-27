@@ -50,10 +50,14 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
 
     const getColor = (rowId) => {
         const data = JSON.parse(localStorage.getItem('todos'));
-        for (const [key, value] of Object.keys(data)) {
-            if (data[key].id === rowId) {
-                return data[key].colors;
+        if (data) {
+            for (const [key, value] of Object.keys(data)) {
+                if (data[key].id === rowId) {
+                    return data[key].colors;
+                }
             }
+        } else {
+            return "white";
         }
         // // console.log(rowId);
     }
@@ -223,7 +227,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
     }
 
 
-    if (edit.id) {
+    if (edit.id && todos) {
 
         return (
 
