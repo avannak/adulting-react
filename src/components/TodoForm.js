@@ -27,7 +27,6 @@ function TodoForm(props) {
             id: v4(),
             text: input,
             colors: "white",
-            // colors: colorExists ? "white": "white",
         });
         console.log("grabbing data after handling submit: ", data);
         setCounterState(false);
