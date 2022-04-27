@@ -75,8 +75,6 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
     }
 
     const changeColor = (rowId, locData) => {
-        const data = JSON.parse(localStorage.getItem('todos'));
-
         const getIdFromStrge = (locData) => {
             for (const [key, value] of Object.keys(locData)) {
                 if (locData[key].id === rowId) {
@@ -227,13 +225,14 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
     }
 
 
-    if (edit.id && todos) {
+    if (edit.id) {
 
         return (
 
             <div>
                 <TodoForm edit={edit} onSubmit={submitUpdate} />
                 {todos.map((todo, index) =>
+
                     <div ref={rowRef} key={index} className={todo.isComplete ? 'todo-row complete' : 'todo-row'} >
                         <Draggable key={todo.id} draggableId={todo.id} index={index} >
                             {(provided, snapshot) => (
@@ -260,18 +259,20 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
                                         </div>
                                         <div className="edit-icon">
                                             <FaRegEdit size={28} onClick={() => {
+                                                const data = JSON.parse(localStorage.getItem('todos'));
+                                                localStorage.setItem('todos', JSON.stringify(data));
                                                 setEdit({ id: todo.id, value: filterText(todo.text) });
                                                 updateItem = filterText(todo.text);
-
+                                                console.log("data after pressing edit is: ", data);
                                             }} />
                                         </div>
                                         <div className="change-color-icon">
                                             <HiOutlineColorSwatch size={28} onClick={() => {
                                                 const data = JSON.parse(localStorage.getItem('todos'));
-                                                localStorage.setItem('todos', JSON.stringify(data));
                                                 changeColor(todo.id, data);
+                                                localStorage.setItem('todos', JSON.stringify(data));
 
-                                                console.log("data is: ", data);
+                                                console.log("data after pressing change color: ", data);
                                             }} />
                                         </div>
                                     </div>
@@ -301,7 +302,11 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
                                     todo.id
                                 )}>
 
-                            <div className="todo-text" key={todo.id} onClick={() => completeTodo(todo.id, completeTxt = filterText(todo.text))}>
+                            <div className="todo-text" key={todo.id} onClick={() => {
+
+                                completeTodo(todo.id, completeTxt = filterText(todo.text));
+
+                            }}>
                                 {todo.text}
                             </div>
                             <div className="icons">

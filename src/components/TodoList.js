@@ -95,11 +95,13 @@ function TodoList() {
         updatedMsg = filterText(prevValue);
         newMsg = filterText(newValue.text);
         if (!newValue.text || /^\s*$/.test(newValue.text) || updatedMsg === newMsg) {
+            setTodos(prev => prev.map(item => (item.id === todoId ? newValue : item)))
             return;
+        } else {
+            changeStatus(updatedMsg, "updateTodo");
+            setTodos(prev => prev.map(item => (item.id === todoId ? newValue : item)))
+            taskItem = newValue;
         }
-        changeStatus(updatedMsg, "updateTodo");
-        setTodos(prev => prev.map(item => (item.id === todoId ? newValue : item)))
-        taskItem = newValue;
     }
     const completeTodo = (id, text) => {
         let updatedTodos = todos.map(todo => {
@@ -108,6 +110,7 @@ function TodoList() {
             }
             return todo;
         });
+        updateStorage(todos);
         setTodos(updatedTodos);
     }
     const removeTodo = (id, text) => {
