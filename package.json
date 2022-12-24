@@ -39,6 +39,6 @@
     ]
   },
   "devDependencies": {
-    "react-beautiful-dnd": "^13.1.0"
+    "react-beautiful-dnd": "^13.1.1"
   }
 }
