@@ -57,30 +57,36 @@ function Todo({ completeTodo, removeTodo, updateTodo }) {
       // console.log(todos);
       if (todo.id === todoId) {
         if (todo.colors === "" || todo.colors === "white") {
-          todo.colors = "blue";
-          setColor("blue");
+          todo.colors = "lightcoral";
+          setColor("lightcoral");
           localStorage.setItem("todos", JSON.stringify(todos));
           return;
         }
-        if (todo.colors === "blue") {
-          todo.colors = "green";
-          setColor("green");
+        if (todo.colors === "lightcoral") {
+          todo.colors = "rgb(252, 196, 92)";
+          setColor("rgb(252, 196, 92)");
           localStorage.setItem("todos", JSON.stringify(todos));
           return;
         }
-        if (todo.colors === "green") {
-          todo.colors = "yellow";
-          setColor("yellow");
+        if (todo.colors === "rgb(252, 196, 92)") {
+          todo.colors = "rgb(255, 243, 132)";
+          setColor("rgb(255, 243, 132)");
           localStorage.setItem("todos", JSON.stringify(todos));
           return;
         }
-        if (todo.colors === "yellow") {
-          todo.colors = "red";
-          setColor("red");
+        if (todo.colors === "rgb(255, 243, 132)") {
+          todo.colors = "lightgreen";
+          setColor("lightgreen");
           localStorage.setItem("todos", JSON.stringify(todos));
           return;
         }
-        if (todo.colors === "red") {
+        if (todo.colors === "lightgreen") {
+          todo.colors = "lightblue";
+          setColor("lightblue");
+          localStorage.setItem("todos", JSON.stringify(todos));
+          return;
+        }
+        if (todo.colors === "lightblue") {
           todo.colors = "white";
           setColor("white");
           localStorage.setItem("todos", JSON.stringify(todos));
