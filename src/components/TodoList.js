@@ -6,11 +6,6 @@ import adulting from "./assets/gifs/adulting-demo.gif";
 import { RiInformationLine } from "react-icons/ri";
 import { TodoContext } from "../contexts/TodoContext";
 
-let taskItem = "";
-let btnType = "";
-let updatedMsg = "";
-let newMsg = "";
-
 function TodoList() {
   const {
     todos,
@@ -25,6 +20,10 @@ function TodoList() {
     setNewMsg,
     removeItem,
     setRemoveItem,
+    dragNotifToggled,
+    setDragNotifState,
+    stateToggled,
+    setStatusState,
   } = useContext(TodoContext);
   let data = JSON.parse(localStorage.getItem("todos"));
   const updateStorage = (updatedData) => {
@@ -34,9 +33,6 @@ function TodoList() {
     };
     localStorage.setItem("todos", JSON.stringify(data));
   };
-
-  const [stateToggled, setStatusState] = useState(false);
-  const [dragNotifToggled, setDragNotifState] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -135,13 +131,26 @@ function TodoList() {
     }
   };
 
-  useEffect(() => {}, [taskItem, setRemoveItem, removeItem]);
+  useEffect(() => {}, [
+    taskItem,
+    setRemoveItem,
+    removeItem,
+    dragNotifToggled,
+    setDragNotifState,
+    stateToggled,
+    setStatusState,
+  ]);
   // "list-status active"
   return (
     <div>
       <h1 id="title-text">What is today's plan?</h1>
       <div className="form-container">
-        <button onClick={getDraggableNotif} className="info-button">
+        <button
+          onClick={() => {
+            getDraggableNotif();
+          }}
+          className="info-button"
+        >
           <RiInformationLine size={20}></RiInformationLine>
         </button>
         <TodoForm onSubmit={addTodo} />

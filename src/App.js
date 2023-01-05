@@ -12,6 +12,9 @@ function App() {
   const [updatedMsg, setUpdatedMsg] = useState("");
   const [newMsg, setNewMsg] = useState("");
   const [isEditing, setIsEditing] = useState(false);
+  const [dragNotifToggled, setDragNotifState] = useState(false);
+  const [stateToggled, setStatusState] = useState(false);
+  const [color, setColor] = useState("white");
   // const [todos, setTodos] = useState([]);
   const [todos, setTodos] = useState(() => {
     // get the todos from localstorage
@@ -27,7 +30,6 @@ function App() {
     }
   });
 
-  const [color, setColor] = useState("white");
   return (
     <div className="todo-app">
       <TodoContext.Provider
@@ -52,6 +54,10 @@ function App() {
           setNewMsg,
           isEditing,
           setIsEditing,
+          dragNotifToggled,
+          setDragNotifState,
+          stateToggled,
+          setStatusState,
         }}
       >
         <TodoList></TodoList>
