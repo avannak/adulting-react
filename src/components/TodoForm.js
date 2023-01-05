@@ -5,7 +5,8 @@ import { TodoContext } from "../contexts/TodoContext";
 function TodoForm(props) {
   const [input, setInput] = useState(props.edit ? props.edit.value : "");
   const [counterStateToggled, setCounterState] = useState(() => false);
-  const { todos, setTodos } = useContext(TodoContext);
+  const { todos, setTodos, color, setColor, isEditing, setIsEditing } =
+    useContext(TodoContext);
 
   const inputRef = useRef(null);
 
@@ -16,6 +17,10 @@ function TodoForm(props) {
     }
   }, [input]);
 
+  useEffect(() => {
+    // console.log(isEditing);
+  }, [color, setColor, setIsEditing]);
+
   const handleChange = (e) => {
     setCounterState(true);
     setInput(e.target.value);
@@ -25,41 +30,68 @@ function TodoForm(props) {
     props.onSubmit({
       id: v4(),
       text: input,
-      colors: "",
+      colors: color,
+    });
+    setCounterState(false);
+    setInput("");
+  };
+
+  const handleNewTaskSubmit = (e) => {
+    e.preventDefault();
+    props.onSubmit({
+      id: v4(),
+      text: input,
+      colors: "white",
     });
     setCounterState(false);
     setInput("");
   };
   return (
-    <form className="todo-form" onSubmit={handleSubmit}>
+    <>
       {props.edit ? (
-        <div>
-          <input
-            type="text"
-            value={input}
-            placeholder="update your task"
-            name="text"
-            className="todo-input edit"
-            onChange={handleChange}
-            ref={inputRef}
-            maxLength={100}
-          />
-          <button className="todo-button edit">Update</button>
-        </div>
+        <form className="todo-form" onSubmit={handleSubmit}>
+          <div className="add-container">
+            <input
+              type="text"
+              value={input}
+              placeholder="update your task"
+              name="text"
+              className="todo-input edit"
+              onChange={handleChange}
+              ref={inputRef}
+              maxLength={100}
+            />
+            <button
+              className="todo-button edit"
+              onClick={() => {
+                setIsEditing(false);
+              }}
+            >
+              Update
+            </button>
+          </div>
+        </form>
       ) : (
-        <div>
-          <input
-            type="text"
-            value={input}
-            placeholder="enter a task"
-            name="text"
-            className="todo-input"
-            onChange={handleChange}
-            ref={inputRef}
-            maxLength={100}
-          />
-          <button className="todo-button">Add Task</button>
-        </div>
+        <form className="todo-form" onSubmit={handleNewTaskSubmit}>
+          <div className="add-container">
+            <input
+              type="text"
+              value={input}
+              placeholder="enter a task"
+              name="text"
+              className="todo-input"
+              onChange={handleChange}
+              ref={inputRef}
+              maxLength={100}
+            />
+            <button
+              className={isEditing ? "todo-button disabled" : "todo-button"}
+              disabled={isEditing ? true : false}
+            >
+              Add Task
+            </button>
+          </div>
+        </form>
       )}
       <div
         style={{ color: "white" }}
@@ -69,7 +101,7 @@ function TodoForm(props) {
       >
         {100 - input.length} characters left
       </div>
-    </form>
+    </>
   );
 }
 

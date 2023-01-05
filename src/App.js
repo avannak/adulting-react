@@ -4,6 +4,14 @@ import TodoList from "./components/TodoList";
 import { TodoContext } from "./contexts/TodoContext";
 
 function App() {
+  const [removeItem, setRemoveItem] = useState("");
+  const [completeTxt, setCompleteTxt] = useState("");
+  const [updateItem, setUpdateItem] = useState("");
+  const [taskItem, setTaskItem] = useState("");
+  const [btnType, setBtnType] = useState("");
+  const [updatedMsg, setUpdatedMsg] = useState("");
+  const [newMsg, setNewMsg] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
   // const [todos, setTodos] = useState([]);
   const [todos, setTodos] = useState(() => {
     // get the todos from localstorage
@@ -22,7 +30,30 @@ function App() {
   const [color, setColor] = useState("white");
   return (
     <div className="todo-app">
-      <TodoContext.Provider value={{ todos, setTodos, color, setColor }}>
+      <TodoContext.Provider
+        value={{
+          todos,
+          setTodos,
+          color,
+          setColor,
+          removeItem,
+          setRemoveItem,
+          completeTxt,
+          setCompleteTxt,
+          updateItem,
+          setUpdateItem,
+          taskItem,
+          setTaskItem,
+          btnType,
+          setBtnType,
+          updatedMsg,
+          setUpdatedMsg,
+          newMsg,
+          setNewMsg,
+          isEditing,
+          setIsEditing,
+        }}
+      >
         <TodoList></TodoList>
       </TodoContext.Provider>
     </div>

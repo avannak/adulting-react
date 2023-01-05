@@ -45,7 +45,7 @@ body {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: start;
-  min-width: 95vw;
+  min-width: 300px;
   max-width: 95vw;
   min-height: 600px;
   background: #161a2b;
@@ -57,17 +57,17 @@ body {
           box-shadow: 2px 10px 10px rgba(0, 0, 0, 0.753);
 }
 
-.form-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
+.add-container {
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+.form-container {
+  align-items: center;
+  justify-content: center;
+  margin: auto;
 }
 
 .info-button {
@@ -145,6 +145,9 @@ body {
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
+.disabled {
+  opacity: 0.3;
+}
 
 .todo-button:hover {
   color: #ffffff;
@@ -170,6 +173,7 @@ body {
 
 .todo-form {
   padding: 0;
+  min-width: 240px;
 }
 
 .todo-input {

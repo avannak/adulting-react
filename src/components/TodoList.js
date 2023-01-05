@@ -12,7 +12,20 @@ let updatedMsg = "";
 let newMsg = "";
 
 function TodoList() {
-  const { todos, setTodos } = useContext(TodoContext);
+  const {
+    todos,
+    setTodos,
+    taskItem,
+    setTaskItem,
+    btnType,
+    setBtnType,
+    updatedMsg,
+    setUpdatedMsg,
+    newMsg,
+    setNewMsg,
+    removeItem,
+    setRemoveItem,
+  } = useContext(TodoContext);
   let data = JSON.parse(localStorage.getItem("todos"));
   const updateStorage = (updatedData) => {
     data = {
@@ -33,8 +46,8 @@ function TodoList() {
     const setStateToFalse = () => {
       setStatusState(false);
     };
-    taskItem = message;
-    btnType = buttonType;
+    setTaskItem(message);
+    setBtnType(buttonType);
     // getStatusMsg(message, buttonType);
     setStatusState(true);
     // console.log("setStatusState is: ", stateToggled);
@@ -53,7 +66,7 @@ function TodoList() {
 
     const newTodos = [todo, ...todos];
     setTodos(newTodos);
-    taskItem = filterText(todo.text);
+    setTaskItem(filterText(todo.text));
     changeStatus(filterText(todo.text), "addTodo");
 
     // console.log(todo, ...todos);
@@ -76,8 +89,9 @@ function TodoList() {
 
   const updateTodo = (todoId, newValue, prevValue) => {
     updateStorage(todos);
-    updatedMsg = filterText(prevValue);
-    newMsg = filterText(newValue.text);
+    console.log("todos is:", todos);
+    setUpdatedMsg(filterText(prevValue));
+    setNewMsg(filterText(newValue.text));
     if (
       !newValue.text ||
       /^\s*$/.test(newValue.text) ||
@@ -92,7 +106,7 @@ function TodoList() {
       setTodos((prev) =>
         prev.map((item) => (item.id === todoId ? newValue : item))
       );
-      taskItem = newValue;
+      setTaskItem(newValue);
     }
   };
   const completeTodo = (id, text) => {
@@ -106,7 +120,7 @@ function TodoList() {
     setTodos(updatedTodos);
   };
   const removeTodo = (id, text) => {
-    taskItem = filterText(text);
+    setTaskItem(removeItem);
     changeStatus(text, "removeTodo");
     const removeArr = [...todos].filter((todo) => todo.id !== id);
     setTodos(removeArr);
@@ -120,6 +134,8 @@ function TodoList() {
       }, 6000);
     }
   };
+
+  useEffect(() => {}, [taskItem, setRemoveItem, removeItem]);
   // "list-status active"
   return (
     <div>
