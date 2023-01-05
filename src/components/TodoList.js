@@ -173,7 +173,7 @@ function TodoList() {
       <h1
         className={stateToggled ? "list-status active" : "list-status inactive"}
       >
-        {getStatusMsg(taskItem, btnType)}
+        {stateToggled && getStatusMsg(taskItem, btnType)}
       </h1>
       <DragDropContext
         onDragEnd={(param) => {
